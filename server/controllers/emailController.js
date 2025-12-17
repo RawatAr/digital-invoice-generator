@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const PDFDocument = require('pdfkit');
 const Invoice = require('../models/Invoice');
 const { generateInvoicePDF: generateCustomInvoicePDF } = require('../utils/pdfGenerator');
+const { getLatestRatesInr, getRateFromInr, normalizeCurrencyCode } = require('../utils/fx');
 
 const sendInvoiceEmail = async (req, res) => {
   try {
@@ -48,7 +49,14 @@ const sendInvoiceEmail = async (req, res) => {
       res.status(200).send('Email sent successfully');
     });
 
-    generateCustomInvoicePDF(doc, invoice, invoice.client, invoice.items, invoice.user);
+    const currency = normalizeCurrencyCode(req.query.currency || 'INR');
+    let rate = 1;
+    if (currency !== 'INR') {
+      const cached = await getLatestRatesInr();
+      rate = getRateFromInr(cached.rates, currency);
+    }
+
+    generateCustomInvoicePDF(doc, invoice, invoice.client, invoice.items, invoice.user, { currency, rate });
 
     doc.end();
   } catch (error) {

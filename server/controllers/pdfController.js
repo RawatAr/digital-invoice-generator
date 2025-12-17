@@ -3,6 +3,7 @@ const Invoice = require('../models/Invoice');
 const Client = require('../models/Client');
 const Item = require('../models/Item');
 const { generateInvoicePDF: generateCustomInvoicePDF } = require('../utils/pdfGenerator');
+const { getLatestRatesInr, getRateFromInr, normalizeCurrencyCode } = require('../utils/fx');
 
 const generateInvoicePDF = async (req, res) => {
   try {
@@ -23,7 +24,14 @@ const generateInvoicePDF = async (req, res) => {
 
     doc.pipe(res);
 
-    generateCustomInvoicePDF(doc, invoice, invoice.client, invoice.items, req.user);
+    const currency = normalizeCurrencyCode(req.query.currency || 'INR');
+    let rate = 1;
+    if (currency !== 'INR') {
+      const cached = await getLatestRatesInr();
+      rate = getRateFromInr(cached.rates, currency);
+    }
+
+    generateCustomInvoicePDF(doc, invoice, invoice.client, invoice.items, req.user, { currency, rate });
 
     doc.end();
   } catch (error) {

@@ -19,6 +19,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/invoices', require('./routes/invoices'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/items', require('./routes/items'));
+app.use('/api/fx', require('./routes/fx'));
 app.use('/api/pdf', require('./routes/pdf'));
 app.use('/api/email', require('./routes/email'));
 

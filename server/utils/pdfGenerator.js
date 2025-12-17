@@ -1,6 +1,24 @@
 const PDFDocument = require('pdfkit');
 
-function generateInvoicePDF(doc, invoice, client, items, user) {
+function formatMoney(amount, currency) {
+  const n = Number(amount || 0);
+  const code = String(currency || 'INR').toUpperCase();
+  try {
+    return new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: code,
+      maximumFractionDigits: 2,
+    }).format(n);
+  } catch {
+    return `${code} ${n.toFixed(2)}`;
+  }
+}
+
+function generateInvoicePDF(doc, invoice, client, items, user, options = {}) {
+  const currency = String(options.currency || 'INR').toUpperCase();
+  const rate = Number(options.rate || 1);
+  const convert = (value) => Number(value || 0) * rate;
+
   // Header
   if (user.companyLogo) {
     doc.image(user.companyLogo, 50, 45, { width: 50 });
@@ -34,13 +52,15 @@ function generateInvoicePDF(doc, invoice, client, items, user) {
   items.forEach(item => {
     doc.text(item.description, itemCol, y);
     doc.text(item.quantity.toString(), qtyCol, y);
-    doc.text(`$${item.price.toFixed(2)}`, rateCol, y);
-    doc.text(`$${(item.quantity * item.price).toFixed(2)}`, amountCol, y, { align: 'right' });
+    doc.text(formatMoney(convert(item.price), currency), rateCol, y);
+    doc.text(formatMoney(convert(item.quantity * item.price), currency), amountCol, y, { align: 'right' });
     y += 25;
   });
 
   // Total
-  doc.fontSize(12).text(`Total: $${invoice.total.toFixed(2)}`, 200, y + 30, { align: 'right', bold: true });
+  doc
+    .fontSize(12)
+    .text(`Total: ${formatMoney(convert(invoice.total), currency)}`, 200, y + 30, { align: 'right', bold: true });
 
   // Footer
   doc.fontSize(10).text('Thank you for your business.', 50, doc.page.height - 50, { align: 'center' });

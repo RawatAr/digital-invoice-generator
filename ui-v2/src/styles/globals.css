@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: 6 8 15;
+  --fg: 241 245 255;
+  --muted: 148 163 184;
+  --surface: 14 19 34;
+  --surface2: 10 14 28;
+  --border: 255 255 255;
+  --border-a: 0.09;
+  --ring: 99 102 241;
+  --input-bg: 255 255 255;
+  --input-a: 0.06;
+  --kbd-bg: 255 255 255;
+  --kbd-a: 0.06;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --shadow-lift: 0 18px 60px rgba(0,0,0,0.55);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: 248 250 252;
+  --fg: 15 23 42;
+  --muted: 71 85 105;
+  --surface: 255 255 255;
+  --surface2: 241 245 249;
+  --border: 15 23 42;
+  --border-a: 0.10;
+  --ring: 59 130 246;
+  --input-bg: 15 23 42;
+  --input-a: 0.04;
+  --kbd-bg: 15 23 42;
+  --kbd-a: 0.04;
+  --shadow: 0 10px 30px rgba(15,23,42,0.10);
+  --shadow-lift: 0 18px 60px rgba(15,23,42,0.14);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
+:root[data-theme='light'] body {
+  background: radial-gradient(1000px 520px at 18% 0%, rgba(34, 211, 238, 0.12), transparent 55%),
+    radial-gradient(920px 520px at 86% 18%, rgba(139, 92, 246, 0.12), transparent 52%),
+    rgb(var(--bg));
+}
+
+#root {
+  min-height: 100%;
+}
+
+::selection {
+  background: rgba(var(--ring), 0.22);
+}
+
+:root[data-theme='light'] {
+  /* Theme-compat shim: maps existing Tailwind "dark-first" utility usage to light tokens.
+     This avoids editing every page file while still making light mode readable. */
+  .text-white {
+    color: rgb(var(--fg)) !important;
+  }
+  .text-white\/45 {
+    color: rgba(var(--fg), 0.45) !important;
+  }
+  .text-white\/55 {
+    color: rgba(var(--fg), 0.60) !important;
+  }
+  .text-white\/60 {
+    color: rgba(var(--fg), 0.66) !important;
+  }
+  .text-white\/65 {
+    color: rgba(var(--fg), 0.70) !important;
+  }
+  .text-white\/70 {
+    color: rgba(var(--fg), 0.74) !important;
+  }
+  .text-white\/75 {
+    color: rgba(var(--fg), 0.78) !important;
+  }
+  .text-white\/85 {
+    color: rgba(var(--fg), 0.90) !important;
+  }
+
+  .border-white\/10 {
+    border-color: rgba(var(--border), 0.14) !important;
+  }
+  .border-white\/12 {
+    border-color: rgba(var(--border), 0.16) !important;
+  }
+  .border-white\/14 {
+    border-color: rgba(var(--border), 0.18) !important;
+  }
+
+  .bg-white\/5 {
+    background-color: rgba(var(--input-bg), var(--input-a)) !important;
+  }
+  .bg-white\/10 {
+    background-color: rgba(var(--input-bg), calc(var(--input-a) + 0.08)) !important;
+  }
+
+  .bg-black\/30 {
+    background-color: rgba(var(--border), 0.04) !important;
+  }
+
+  .bg-black\/40 {
+    background-color: rgba(var(--border), 0.06) !important;
+  }
+
+  .bg-black\/50 {
+    background-color: rgba(var(--border), 0.08) !important;
+  }
+
+  .shadow-ring {
+    box-shadow: 0 0 0 1px rgba(var(--border), 0.14) inset !important;
+  }
+
+  .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgba(var(--border), 0.14) !important;
+  }
+}
+
+@layer components {
+  .ds-container {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+
+  .ds-panel {
+    @apply rounded-3xl border shadow-soft;
+    background: linear-gradient(180deg, rgba(var(--surface), 0.8), rgba(var(--surface2), 0.75));
+    border-color: rgba(var(--border), var(--border-a));
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow);
+  }
+
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .ds-input {
+    @apply h-11 w-full rounded-xl border px-3 text-sm outline-none;
+    color: rgb(var(--fg));
+    background: rgba(var(--input-bg), var(--input-a));
+    border-color: rgba(var(--border), 0.14);
+  }
+
+  .ds-input::placeholder {
+    color: rgba(var(--fg), 0.45);
+  }
+
+  .ds-input:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .ds-input:focus {
+    border-color: rgba(var(--ring), 0.65);
+    box-shadow: 0 0 0 4px rgba(var(--ring), 0.18);
+  }
+
+  select.ds-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, rgba(var(--fg), 0.55) 50%),
+      linear-gradient(135deg, rgba(var(--fg), 0.55) 50%, transparent 50%);
+    background-position:
+      calc(100% - 16px) calc(1em + 2px),
+      calc(100% - 11px) calc(1em + 2px);
+    background-size:
+      5px 5px,
+      5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.25rem;
+  }
+
+  select.ds-input option {
+    background: rgb(var(--surface));
+    color: rgb(var(--fg));
+  }
+
+  .ds-btn {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold tracking-tight transition;
+  }
+
+  .ds-btn-primary {
+    @apply ds-btn text-black;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 1), rgba(34, 211, 238, 1));
+  }
+
+  .ds-btn-primary:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  .ds-btn-secondary {
+    @apply ds-btn border;
+    color: rgb(var(--fg));
+    background: rgba(var(--input-bg), var(--input-a));
+    border-color: rgba(var(--border), 0.14);
+  }
+
+  .ds-btn-secondary:hover {
+    background: rgba(var(--input-bg), calc(var(--input-a) + 0.06));
+    transform: translateY(-1px);
+  }
+
+  .ds-btn-danger {
+    @apply ds-btn border;
+    color: rgb(var(--fg));
+    background: rgba(244, 63, 94, 0.10);
+    border-color: rgba(244, 63, 94, 0.28);
+  }
+
+  .ds-btn-danger:hover {
+    background: rgba(244, 63, 94, 0.14);
+    transform: translateY(-1px);
+  }
+
+  .ds-kbd {
+    @apply rounded-lg border px-2 py-1 text-[11px] font-semibold;
+    color: rgba(var(--fg), 0.70);
+    background: rgba(var(--kbd-bg), var(--kbd-a));
+    border-color: rgba(var(--border), 0.14);
+  }
+}
