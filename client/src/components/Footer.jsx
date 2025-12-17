@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 function Footer() {
   return (
     <footer className="border-t mt-auto">
@@ -8,14 +6,6 @@ function Footer() {
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             © {new Date().getFullYear()} InvoiceGen. All rights reserved.
           </p>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link to="/about" className="text-sm text-muted-foreground hover:text-primary">
-            About
-          </Link>
-          <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary">
-            Contact
-          </Link>
         </div>
       </div>
     </footer>

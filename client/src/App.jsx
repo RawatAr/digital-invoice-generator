@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
@@ -7,11 +7,10 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import Clients from './pages/Clients';
-import Items from './pages/Items';
-import Landing from './pages/Landing';
-import About from './pages/About';
-import Contact from './pages/Contact';
 import Settings from './pages/Settings';
+import CreateInvoice from './pages/CreateInvoice';
+import InvoiceDetail from './pages/InvoiceDetail';
+import Reports from './pages/Reports';
 
 function App() {
   return (
@@ -20,16 +19,16 @@ function App() {
         <Router>
           <Routes>
             <Route element={<Layout />}>
-              <Route index element={<Landing />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
 
               <Route element={<PrivateRoute />}>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="invoices/new" element={<CreateInvoice />} />
+                <Route path="invoices/:invoiceId" element={<InvoiceDetail />} />
                 <Route path="clients" element={<Clients />} />
-                <Route path="items" element={<Items />} />
+                <Route path="reports" element={<Reports />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
             </Route>
