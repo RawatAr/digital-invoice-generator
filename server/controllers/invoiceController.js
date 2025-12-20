@@ -1,4 +1,6 @@
 const Invoice = require('../models/Invoice');
+const Client = require('../models/Client');
+const Item = require('../models/Item');
 
 function normalizeStatus(s) {
   const v = String(s || '').toLowerCase();
@@ -60,6 +62,32 @@ function arrayEq(a, b) {
   return true;
 }
 
+async function requireOwnedClient(userId, clientId) {
+  const client = await Client.findOne({ _id: clientId, user: userId }).select('_id').lean();
+  if (!client) {
+    const err = new Error('Client not found');
+    err.statusCode = 400;
+    throw err;
+  }
+}
+
+async function requireOwnedItems(userId, itemIds) {
+  const ids = Array.isArray(itemIds) ? itemIds : [];
+  const unique = [...new Set(ids.map(String))];
+  if (!unique.length) {
+    const err = new Error('At least one item is required');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const count = await Item.countDocuments({ _id: { $in: unique }, user: userId });
+  if (count !== unique.length) {
+    const err = new Error('One or more items are invalid');
+    err.statusCode = 400;
+    throw err;
+  }
+}
+
 // @desc    Get invoices
 // @route   GET /api/invoices
 // @access  Private
@@ -99,6 +127,9 @@ const setInvoice = async (req, res) => {
     res.status(400);
     throw new Error('Please add all fields');
   }
+
+  await requireOwnedClient(req.user.id, client);
+  await requireOwnedItems(req.user.id, items);
 
   const cleanSubtotal = subtotal == null ? null : Number(subtotal);
   const cleanTaxTotal = taxTotal == null ? null : Number(taxTotal);
@@ -210,7 +241,6 @@ const updateInvoice = async (req, res) => {
     throw new Error('User not authorized');
   }
 
-  // Lightweight versioning: only track changes while invoice is still a draft.
   const draftLike = isDraftLike(invoice.status);
   const sentLike = isSentLike(invoice.status);
   const paid = isPaid(invoice.status);
@@ -247,6 +277,13 @@ const updateInvoice = async (req, res) => {
     templateKey: req.body.templateKey ?? invoice.templateKey,
     status: req.body.status ?? invoice.status,
   };
+
+  if (String(next.client) !== String(invoice.client)) {
+    await requireOwnedClient(req.user.id, next.client);
+  }
+  if (!arrayEq(next.items, invoice.items)) {
+    await requireOwnedItems(req.user.id, next.items);
+  }
 
   const nextStatus = normalizeStatus(next.status);
   if (sentLike) {

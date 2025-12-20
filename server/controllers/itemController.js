@@ -4,7 +4,7 @@ const Item = require('../models/Item');
 // @route   GET /api/items
 // @access  Private
 const getItems = async (req, res) => {
-  const items = await Item.find();
+  const items = await Item.find({ user: req.user.id });
   res.status(200).json(items);
 };
 
@@ -20,6 +20,7 @@ const setItem = async (req, res) => {
   }
 
   const item = await Item.create({
+    user: req.user.id,
     description,
     quantity,
     price,
@@ -39,9 +40,24 @@ const updateItem = async (req, res) => {
     throw new Error('Item not found');
   }
 
-  const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  if (String(item.user) !== String(req.user.id)) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+
+  const updatedItem = await Item.findOneAndUpdate({ _id: req.params.id, user: req.user.id }, req.body, {
     new: true,
   });
+
+  if (!updatedItem) {
+    res.status(404);
+    throw new Error('Item not found');
+  }
 
   res.status(200).json(updatedItem);
 };
@@ -57,7 +73,22 @@ const deleteItem = async (req, res) => {
     throw new Error('Item not found');
   }
 
-  await Item.findByIdAndDelete(req.params.id);
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  if (String(item.user) !== String(req.user.id)) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+
+  const deleted = await Item.findOneAndDelete({ _id: req.params.id, user: req.user.id });
+
+  if (!deleted) {
+    res.status(404);
+    throw new Error('Item not found');
+  }
 
   res.status(200).json({ id: req.params.id });
 };
