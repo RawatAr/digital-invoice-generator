@@ -22,6 +22,14 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 }
 
+function extractEmailAddress(value) {
+  const s = String(value || '').trim();
+  if (!s) return '';
+  const m = s.match(/<([^>]+)>/);
+  const candidate = (m && m[1] ? m[1] : s).trim();
+  return candidate;
+}
+
 function requireEmailConfig() {
   const hasBrevo = Boolean(process.env.BREVO_API_KEY);
   const smtpMissing = [];
@@ -66,8 +74,16 @@ async function sendWithBrevoApi({ mail, pdfData, invoice }) {
     throw err;
   }
 
-  const senderEmail = String(mail.from || process.env.EMAIL_FROM || '').trim();
+  const senderEmail = extractEmailAddress(mail.from || process.env.EMAIL_FROM);
   const senderName = String(invoice?.user?.companyName || invoice?.user?.name || 'Invoice Studio');
+
+  if (!isValidEmail(senderEmail)) {
+    const err = new Error(
+      'Brevo requires a valid sender email. Set EMAIL_FROM to a verified Brevo sender (example: billing@yourdomain.com).',
+    );
+    err.statusCode = 400;
+    throw err;
+  }
 
   const toList = normalizeEmailList(mail.to).map((email) => ({ email }));
   const ccList = normalizeEmailList(mail.cc).map((email) => ({ email }));
