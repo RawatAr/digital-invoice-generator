@@ -1,4 +1,5 @@
 const PDFDocument = require('pdfkit');
+const fs = require('fs');
 
 function formatMoney(amount, currency) {
   const n = Number(amount || 0);
@@ -53,7 +54,15 @@ function generateInvoicePDF(doc, invoice, client, items, user, options = {}) {
   }
 
   if (user.companyLogo) {
-    doc.image(user.companyLogo, 50, theme.headerBar ? 16 : 45, { width: 50 });
+    try {
+      const logoPath = String(user.companyLogo);
+      const looksLikeLocal = !/^https?:\/\//i.test(logoPath);
+      if (!looksLikeLocal || fs.existsSync(logoPath)) {
+        doc.image(logoPath, 50, theme.headerBar ? 16 : 45, { width: 50 });
+      }
+    } catch {
+      // Ignore missing/invalid logo in production environments.
+    }
   }
   doc.fontSize(theme.heading).text(user.companyName || 'Your Company', 110, theme.headerBar ? 20 : 57);
 

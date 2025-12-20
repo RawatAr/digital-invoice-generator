@@ -23,12 +23,14 @@ function isValidEmail(email) {
 }
 
 function requireEmailConfig() {
-  const missing = [];
+  const hasBrevo = Boolean(process.env.BREVO_API_KEY);
+  const smtpMissing = [];
   for (const key of ['EMAIL_HOST', 'EMAIL_PORT', 'EMAIL_USER', 'EMAIL_PASS', 'EMAIL_FROM']) {
-    if (!process.env[key]) missing.push(key);
+    if (!process.env[key]) smtpMissing.push(key);
   }
-  if (missing.length) {
-    const err = new Error(`Email not configured. Missing env: ${missing.join(', ')}`);
+
+  if (!hasBrevo && smtpMissing.length) {
+    const err = new Error(`Email not configured. Missing env: ${smtpMissing.join(', ')}`);
     err.statusCode = 400;
     throw err;
   }
@@ -54,6 +56,70 @@ function makeTransporter() {
     greetingTimeout: 20_000,
     socketTimeout: 30_000,
   });
+}
+
+async function sendWithBrevoApi({ mail, pdfData, invoice }) {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    const err = new Error('SMTP verify failed: Connection timeout');
+    err.statusCode = 502;
+    throw err;
+  }
+
+  const senderEmail = String(mail.from || process.env.EMAIL_FROM || '').trim();
+  const senderName = String(invoice?.user?.companyName || invoice?.user?.name || 'Invoice Studio');
+
+  const toList = normalizeEmailList(mail.to).map((email) => ({ email }));
+  const ccList = normalizeEmailList(mail.cc).map((email) => ({ email }));
+  const bccList = normalizeEmailList(mail.bcc).map((email) => ({ email }));
+
+  const payload = {
+    sender: { email: senderEmail, name: senderName },
+    to: toList,
+    subject: String(mail.subject || ''),
+    textContent: String(mail.text || ''),
+    attachment: [
+      {
+        name: `invoice-${invoice.invoiceNumber || invoice._id}.pdf`,
+        content: Buffer.from(pdfData).toString('base64'),
+      },
+    ],
+  };
+
+  if (ccList.length) payload.cc = ccList;
+  if (bccList.length) payload.bcc = bccList;
+
+  const resp = await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      accept: 'application/json',
+      'api-key': apiKey,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const text = await resp.text();
+  if (!resp.ok) {
+    const err = new Error(`Brevo API error: ${resp.status} ${text}`);
+    err.statusCode = 502;
+    throw err;
+  }
+
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    data = { messageId: '' };
+  }
+
+  return {
+    ok: true,
+    messageId: String(data?.messageId || ''),
+    accepted: normalizeEmailList(mail.to),
+    rejected: [],
+    response: 'Brevo API accepted',
+  };
 }
 
 async function getInvoiceForEmail(req) {
@@ -157,9 +223,19 @@ async function sendAndLog({ req, invoice, currency, mail }) {
     try {
       await transporter.verify();
     } catch (verifyErr) {
-      const e = new Error(`SMTP verify failed: ${String(verifyErr?.message || verifyErr)}`);
-      e.statusCode = 502;
-      throw e;
+      const result = await sendWithBrevoApi({ mail, pdfData, invoice });
+
+      await EmailLog.create({
+        ...logBase,
+        status: 'sent',
+        providerMessageId: String(result.messageId || ''),
+        accepted: result.accepted || [],
+        rejected: result.rejected || [],
+        providerResponse: String(result.response || ''),
+        sentAt: new Date(),
+      });
+
+      return result;
     }
 
     const info = await transporter.sendMail({
