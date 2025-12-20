@@ -82,8 +82,49 @@ const updateUserProfile = async (req, res) => {
 
   if (user) {
     user.companyName = req.body.companyName || user.companyName;
+    if (req.body.companyAddress != null) {
+      user.companyAddress = String(req.body.companyAddress || '');
+    }
+    if (req.body.companyEmail != null) {
+      user.companyEmail = String(req.body.companyEmail || '');
+    }
+    if (req.body.companyPhone != null) {
+      user.companyPhone = String(req.body.companyPhone || '');
+    }
+    if (req.body.companyTaxId != null) {
+      user.companyTaxId = String(req.body.companyTaxId || '');
+    }
     if (req.file) {
       user.companyLogo = req.file.path;
+    }
+
+    if (user.invoiceDefaults == null) {
+      user.invoiceDefaults = {};
+    }
+
+    if (req.body.defaultTaxName != null) {
+      user.invoiceDefaults.defaultTaxName = String(req.body.defaultTaxName || '').trim() || user.invoiceDefaults.defaultTaxName;
+    }
+
+    if (req.body.defaultTaxRate != null) {
+      const n = Number(req.body.defaultTaxRate);
+      if (!Number.isNaN(n) && n >= 0 && n <= 100) {
+        user.invoiceDefaults.defaultTaxRate = n;
+      }
+    }
+
+    if (req.body.taxMode != null) {
+      const mode = String(req.body.taxMode || '').toLowerCase();
+      if (mode === 'invoice' || mode === 'line') {
+        user.invoiceDefaults.taxMode = mode;
+      }
+    }
+
+    if (req.body.paymentTermsDays != null) {
+      const n = Number(req.body.paymentTermsDays);
+      if (!Number.isNaN(n) && n >= 0 && n <= 365) {
+        user.invoiceDefaults.paymentTermsDays = n;
+      }
     }
 
     const updatedUser = await user.save();
@@ -93,7 +134,12 @@ const updateUserProfile = async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       companyName: updatedUser.companyName,
+      companyAddress: updatedUser.companyAddress,
+      companyEmail: updatedUser.companyEmail,
+      companyPhone: updatedUser.companyPhone,
+      companyTaxId: updatedUser.companyTaxId,
       companyLogo: updatedUser.companyLogo,
+      invoiceDefaults: updatedUser.invoiceDefaults,
       token: generateToken(updatedUser._id),
     });
   } else {

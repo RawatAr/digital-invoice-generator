@@ -36,11 +36,11 @@ npm start
 
 Backend runs at: `http://localhost:5000`
 
-### Frontend setup (`ui-v2/` — primary UI)
+### Frontend setup (`client/` — primary UI)
 1. Install and start UI:
 
 ```bash
-cd ui-v2
+cd client
 npm install
 npm run dev
 ```
@@ -95,6 +95,7 @@ The dashboard summarizes your invoicing activity:
 - Navigate to:
   - **Create Invoice**
   - **Clients**
+  - **Emails**
   - **Reports**
   - **Settings**
 
@@ -118,7 +119,7 @@ Invoices are typically issued to clients. You select a client when creating an i
 ## 6) Items (Products/Services)
 
 ### Where
-- In the current UI, items are managed via workflows in invoice creation and/or settings (depending on UI version).
+- **Settings** page (`/settings`) → **Item catalog** section
 
 ### What items represent
 Items are reusable products/services with:
@@ -141,9 +142,15 @@ Items are reusable products/services with:
 3. Enter:
    - Invoice number
    - Due date
-   - Status (e.g., draft/sent/paid)
+   - Status (draft/sent/paid)
 4. Review the computed totals
 5. Save/Create invoice
+
+### Next step: choose a PDF template
+After creating a draft invoice, the UI may take you to:
+- `/invoices/:id/template`
+
+This lets you pick a PDF template, preview the PDF, and finalize the invoice.
 
 ### What happens internally
 - The UI constructs the invoice payload
@@ -165,12 +172,16 @@ Items are reusable products/services with:
 - View client information
 - View line items and totals
 
+### Key actions
+- **Download PDF** (generates and downloads the invoice PDF)
+- **Send email** (opens the Email Composer for that invoice)
+
 ---
 
 ## 9) Export as PDF
 
 ### Where
-- On the Invoice Detail page
+- On the Invoice Detail page (`/invoices/:id`) → **Download PDF**
 
 ### What happens
 - UI calls backend endpoint:
@@ -191,11 +202,16 @@ So the exported PDF matches what you see in the UI.
 - On the Invoice Detail page
 
 ### What happens
-- UI calls backend endpoint:
-  - `POST /api/email/:id/send`
-- Backend:
-  - Generates the invoice PDF in-memory
-  - Sends email to the client using SMTP configuration from `.env`
+- The Email Composer lets you review/edit:
+  - Recipient email (supports comma-separated list)
+  - Subject
+  - Email content
+  - Optional CC/BCC (under an advanced toggle)
+
+- When you press **Send**, the UI uses the backend to:
+  - Generate the invoice PDF in-memory
+  - Send the email via SMTP (configured in `server/.env`)
+  - Store a history record so you can audit what was attempted
 
 ### Currency matching
 Same pattern as PDF:
@@ -203,6 +219,11 @@ Same pattern as PDF:
 
 ### If email fails
 - Verify `.env` SMTP values: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_FROM`
+
+### Email history
+You can see email attempts in two places:
+- **Per-invoice history** inside the Email Composer
+- **Global history** on **Emails** page (`/emails`)
 
 ---
 
@@ -214,6 +235,10 @@ Same pattern as PDF:
 ### What it provides
 - Aggregations across invoices (totals, counts, status breakdown)
 
+### Helpful tips
+- Use the date presets (last 7 days / last 30 days / this month)
+- Export a CSV to analyze in Excel/Google Sheets
+
 ---
 
 ## 12) Settings
@@ -223,11 +248,12 @@ Same pattern as PDF:
 
 ### Typical uses
 - Update business/profile details
-- Configure invoice defaults (depending on UI)
+- Manage the item catalog
+- Configure tax defaults and payment term defaults
 
 ---
 
-## 13) Currency Selector (UI v2)
+## 13) Currency Selector (UI)
 
 ### Where
 - In the top navigation bar
@@ -244,7 +270,7 @@ Same pattern as PDF:
 
 ---
 
-## 14) Theme Toggle (UI v2)
+## 14) Theme Toggle (UI)
 
 ### Where
 - In the top navigation bar
@@ -268,6 +294,14 @@ Same pattern as PDF:
 - Ensure `server/.env` includes `JWT_SECRET`
 - Restart backend after changing `.env`
 
+### Email says "sent" but does not arrive
+- The app can only confirm that your SMTP provider accepted the message.
+- If emails do not show in inbox/spam, verify:
+  - SMTP provider credentials are correct
+  - Sender address in `EMAIL_FROM` is allowed by provider
+  - Provider-side logs (Brevo/SendGrid/etc.)
+  - Recipient spam filters
+
 ### `/api/fx/latest` returns 500
 - Your network may be blocking the external FX dataset. The app can still work; FX display may fail until network is available.
 
@@ -287,5 +321,5 @@ Same pattern as PDF:
 - Send invoice via email
 - View reports
 - Adjust settings
-- Switch currency (UI v2)
-- Toggle theme (UI v2)
+- Switch currency (UI)
+- Toggle theme (UI)

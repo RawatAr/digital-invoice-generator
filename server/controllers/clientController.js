@@ -12,7 +12,7 @@ const getClients = async (req, res) => {
 // @route   POST /api/clients
 // @access  Private
 const setClient = async (req, res) => {
-  const { name, email, address, phone } = req.body;
+  const { name, email, address, phone, taxId, isTaxExempt } = req.body;
 
   if (!name || !email) {
     res.status(400);
@@ -25,6 +25,8 @@ const setClient = async (req, res) => {
     email,
     address,
     phone,
+    taxId: taxId || '',
+    isTaxExempt: Boolean(isTaxExempt),
   });
 
   res.status(201).json(client);
@@ -53,7 +55,11 @@ const updateClient = async (req, res) => {
     throw new Error('User not authorized');
   }
 
-  const updatedClient = await Client.findByIdAndUpdate(req.params.id, req.body, {
+  const patch = { ...req.body };
+  if (patch.taxId != null) patch.taxId = String(patch.taxId || '');
+  if (patch.isTaxExempt != null) patch.isTaxExempt = Boolean(patch.isTaxExempt);
+
+  const updatedClient = await Client.findByIdAndUpdate(req.params.id, patch, {
     new: true,
   });
 

@@ -19,6 +19,15 @@ const ClientSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+
+  taxId: {
+    type: String,
+    default: '',
+  },
+  isTaxExempt: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('client', ClientSchema);

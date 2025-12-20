@@ -5,8 +5,7 @@ A full‑stack web application for creating, managing, and exporting professiona
 This repository contains:
 
 - **`server/`**: Node.js + Express REST API (MongoDB, JWT auth) + PDF/email utilities
-- **`ui-v2/`**: **Primary frontend** (React + Vite + Tailwind + Framer Motion)
-- **`client/`**: Legacy frontend (kept for reference; `ui-v2/` is the active UI)
+- **`client/`**: **Primary frontend** (React + Vite + Tailwind + Framer Motion)
 
 ---
 
@@ -28,7 +27,7 @@ This project provides an end‑to‑end invoicing workflow:
 - Export invoices as PDFs
 - Email invoices directly to a client
 - View dashboards/reports
-- (UI v2) Display invoice values in a **user‑selected currency** with live FX rates
+- Display invoice values in a **user‑selected currency** with live FX rates
 
 ---
 
@@ -66,16 +65,61 @@ This project provides an end‑to‑end invoicing workflow:
 ### Reporting & Analytics (UI)
 - Dashboard and reports to summarize invoice totals and status
 
-### Live Currency Conversion (UI v2)
+### Live Currency Conversion (UI)
 - Currency selector persisted in the browser (`localStorage`)
 - Live FX rates fetched via backend endpoint
 - UI amounts and exports can match the selected currency
 
 ---
 
+## Quickstart (Local Development)
+
+### Prerequisites
+- Node.js (LTS recommended)
+- MongoDB (local or Atlas)
+
+### 1) Backend (`server/`)
+
+Create `server/.env`:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_long_random_secret
+PORT=5000
+
+# Email (required for sending invoice emails)
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_USER=your_user
+EMAIL_PASS=your_pass
+EMAIL_FROM=your_from_address
+```
+
+Install and run:
+
+```bash
+npm install
+npm start
+```
+
+Backend runs on `http://localhost:5000`.
+
+### 2) Frontend (`client/`)
+
+Install and run:
+
+```bash
+npm install
+npm run dev
+```
+
+Frontend runs on the Vite dev server (usually `http://localhost:5173`). It proxies `/api` and `/uploads` to the backend.
+
+---
+
 ## Technology Stack
 
-### Frontend (Primary: `ui-v2/`)
+### Frontend (Primary: `client/`)
 - **React (Vite)**
 - **React Router** for routing
 - **Tailwind CSS** for styling
@@ -136,7 +180,7 @@ This is a **monolithic full‑stack project**:
 - `utils/pdfGenerator.js`: PDF layout rendering
 - `utils/fx.js`: FX fetching + caching + INR->currency rate lookup
 
-### `ui-v2/` (Primary UI)
+### `client/` (Primary UI)
 - `src/state/`:
   - `auth.jsx`: auth state + token handling
   - `theme.jsx`: light/dark theme state
@@ -148,50 +192,18 @@ This is a **monolithic full‑stack project**:
 - `src/pages/`: core screens (Dashboard, Create Invoice, Invoice Detail, Clients, Reports, Settings)
 - `src/components/Shell.jsx`: main layout + navbar
 
-### `client/` (Legacy)
-This folder is not the active UI. It remains in the repo for reference.
-
 ---
 
-## Setup & Installation
+## Scripts
 
-### Prerequisites
-- Node.js (LTS recommended)
-- MongoDB instance (local or Atlas)
+### Backend (`server/`)
+- `npm start` — start API server
 
-### 1) Backend (`server/`)
-Create `server/.env`:
-
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_long_random_secret
-PORT=5000
-
-# Optional (email)
-EMAIL_HOST=smtp.example.com
-EMAIL_PORT=587
-EMAIL_USER=your_user
-EMAIL_PASS=your_pass
-EMAIL_FROM=your_from_address
-```
-
-Install and run:
-
-```bash
-npm install
-npm start
-```
-
-Backend runs on `http://localhost:5000`.
-
-### 2) Frontend (`ui-v2/`)
-
-```bash
-npm install
-npm run dev
-```
-
-UI runs on the Vite dev server (shown in terminal output). It proxies `/api/*` to the backend.
+### Frontend (`client/`)
+- `npm run dev` — start Vite dev server
+- `npm run build` — production build
+- `npm run preview` — preview production build (uses proxy config)
+- `npm run lint` — run ESLint
 
 ---
 
@@ -214,6 +226,10 @@ UI runs on the Vite dev server (shown in terminal output). It proxies `/api/*` t
 - **Exports**
   - `GET /api/pdf/:id/generate?currency=USD`
   - `POST /api/email/:id/send?currency=USD`
+  - `POST /api/email/:id/send-custom?currency=USD`
+  - `GET /api/email/:id/draft?currency=USD`
+  - `GET /api/email/:id/history`
+  - `GET /api/email/history`
 - **FX**
   - `GET /api/fx/latest?base=INR&symbols=USD,EUR`
 
@@ -224,7 +240,7 @@ UI runs on the Vite dev server (shown in terminal output). It proxies `/api/*` t
 - Create a feature branch off `main`
 - Keep changes scoped and readable
 - Prefer small, reviewable commits
-- Run `ui-v2` build before opening a PR
+- Run `client` build before opening a PR
 
 ---
 
