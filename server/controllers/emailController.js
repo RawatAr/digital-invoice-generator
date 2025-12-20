@@ -35,13 +35,24 @@ function requireEmailConfig() {
 }
 
 function makeTransporter() {
+  const port = Number(process.env.EMAIL_PORT);
+  const secure = port === 465;
+
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT),
+    port,
+    secure,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    requireTLS: !secure,
+    tls: {
+      servername: process.env.EMAIL_HOST,
+    },
+    connectionTimeout: 20_000,
+    greetingTimeout: 20_000,
+    socketTimeout: 30_000,
   });
 }
 
@@ -143,6 +154,14 @@ async function sendAndLog({ req, invoice, currency, mail }) {
 
   const transporter = makeTransporter();
   try {
+    try {
+      await transporter.verify();
+    } catch (verifyErr) {
+      const e = new Error(`SMTP verify failed: ${String(verifyErr?.message || verifyErr)}`);
+      e.statusCode = 502;
+      throw e;
+    }
+
     const info = await transporter.sendMail({
       from: logBase.from,
       to: logBase.to.join(', '),
