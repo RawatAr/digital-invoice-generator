@@ -81,7 +81,28 @@ body {
 }
 
 ::selection {
-  background: rgba(var(--ring), 0.22);
+  background: rgba(var(--ring), 0.28);
+  color: rgb(var(--fg));
+}
+
+/* Higher-contrast notifications in light mode */
+:root[data-theme='light'] .text-rose-200 {
+  color: rgb(159 18 57) !important;
+}
+:root[data-theme='light'] .text-emerald-200 {
+  color: rgb(4 120 87) !important;
+}
+:root[data-theme='light'] .border-rose-500\/30 {
+  border-color: rgb(244 63 94 / 0.55) !important;
+}
+:root[data-theme='light'] .bg-rose-500\/10 {
+  background-color: rgb(244 63 94 / 0.16) !important;
+}
+:root[data-theme='light'] .border-emerald-500\/30 {
+  border-color: rgb(16 185 129 / 0.55) !important;
+}
+:root[data-theme='light'] .bg-emerald-500\/10 {
+  background-color: rgb(16 185 129 / 0.16) !important;
 }
 
 /* Theme-compat shim: maps existing Tailwind "dark-first" utility usage to light tokens.

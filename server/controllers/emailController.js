@@ -74,7 +74,9 @@ async function sendWithBrevoApi({ mail, pdfData, invoice }) {
     throw err;
   }
 
-  const senderEmail = extractEmailAddress(mail.from || process.env.EMAIL_FROM);
+  const requestedFrom = extractEmailAddress(mail.from);
+  const fallbackFrom = extractEmailAddress(process.env.EMAIL_FROM);
+  const senderEmail = isValidEmail(requestedFrom) ? requestedFrom : fallbackFrom;
   const senderName = String(invoice?.user?.companyName || invoice?.user?.name || 'Invoice Studio');
 
   if (!isValidEmail(senderEmail)) {
@@ -102,6 +104,11 @@ async function sendWithBrevoApi({ mail, pdfData, invoice }) {
     ],
   };
 
+  // If we can't use the user's email as the provider-verified sender, preserve it as reply-to.
+  if (isValidEmail(requestedFrom) && requestedFrom !== senderEmail) {
+    payload.replyTo = { email: requestedFrom, name: senderName };
+  }
+
   if (ccList.length) payload.cc = ccList;
   if (bccList.length) payload.bcc = bccList;
 
@@ -117,6 +124,52 @@ async function sendWithBrevoApi({ mail, pdfData, invoice }) {
 
   const text = await resp.text();
   if (!resp.ok) {
+    // If Brevo rejects the requested sender, retry with EMAIL_FROM as sender and requested sender as reply-to.
+    if (
+      resp.status === 400 &&
+      isValidEmail(requestedFrom) &&
+      requestedFrom !== fallbackFrom &&
+      String(text || '').toLowerCase().includes('valid sender email')
+    ) {
+      const retryPayload = {
+        ...payload,
+        sender: { email: fallbackFrom, name: senderName },
+        replyTo: { email: requestedFrom, name: senderName },
+      };
+
+      const retry = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          accept: 'application/json',
+          'api-key': apiKey,
+        },
+        body: JSON.stringify(retryPayload),
+      });
+
+      const retryText = await retry.text();
+      if (!retry.ok) {
+        const err = new Error(`Brevo API error: ${retry.status} ${retryText}`);
+        err.statusCode = 502;
+        throw err;
+      }
+
+      let retryData;
+      try {
+        retryData = JSON.parse(retryText);
+      } catch {
+        retryData = { messageId: '' };
+      }
+
+      return {
+        ok: true,
+        messageId: String(retryData?.messageId || ''),
+        accepted: normalizeEmailList(mail.to),
+        rejected: [],
+        response: 'Brevo API accepted',
+      };
+    }
+
     const err = new Error(`Brevo API error: ${resp.status} ${text}`);
     err.statusCode = 502;
     throw err;
@@ -199,7 +252,7 @@ function defaultEmailDraft(invoice) {
   ].filter((x) => x !== undefined);
 
   return {
-    from: process.env.EMAIL_FROM || '',
+    from: invoice?.user?.email || process.env.EMAIL_FROM || '',
     to,
     cc: [],
     bcc: [],
@@ -337,7 +390,7 @@ const sendInvoiceEmailCustom = async (req, res) => {
       invoice,
       currency,
       mail: {
-        from: process.env.EMAIL_FROM,
+        from: req.user?.email || process.env.EMAIL_FROM,
         to,
         cc,
         bcc,

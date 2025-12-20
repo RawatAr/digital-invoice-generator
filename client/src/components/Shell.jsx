@@ -1,5 +1,6 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/state/auth.jsx';
 import { useTheme } from '@/state/theme.jsx';
 import { useCurrency } from '@/state/currency.jsx';
@@ -20,12 +21,46 @@ function Shell() {
   const { theme, toggleTheme } = useTheme();
   const { currency, setCurrency, supported, rate, ratesDate, ratesLoading } = useCurrency();
 
+  const [hasSelection, setHasSelection] = useState(false);
+
+  useEffect(() => {
+    const onSelectionChange = () => {
+      try {
+        const sel = window.getSelection();
+        const text = sel ? String(sel.toString() || '') : '';
+        setHasSelection(text.trim().length > 0);
+      } catch {
+        setHasSelection(false);
+      }
+    };
+
+    document.addEventListener('selectionchange', onSelectionChange);
+    window.addEventListener('blur', () => setHasSelection(false));
+    return () => {
+      document.removeEventListener('selectionchange', onSelectionChange);
+    };
+  }, []);
+
   const pageTransition = reduceMotion
     ? { duration: 0 }
     : { duration: 0.28, ease: [0.16, 1, 0.3, 1] };
 
   return (
     <div className="relative min-h-screen overflow-hidden">
+      <AnimatePresence>
+        {hasSelection ? (
+          <motion.div
+            key="selection-indicator"
+            initial={{ opacity: 0, scaleX: 0.5 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            exit={{ opacity: 0, scaleX: 0.6 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="pointer-events-none fixed left-0 right-0 top-0 z-50 h-[3px] origin-center"
+            style={{ background: 'rgb(var(--ring))' }}
+          />
+        ) : null}
+      </AnimatePresence>
+
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_45%_at_15%_0%,rgb(var(--glow-c)_/_0.18),transparent_60%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_45%_at_85%_20%,rgb(var(--glow-b)_/_0.16),transparent_58%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(58%_45%_at_12%_85%,rgb(var(--glow-e)_/_0.12),transparent_60%)]" />

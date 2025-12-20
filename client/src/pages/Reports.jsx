@@ -2,12 +2,20 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { apiListInvoices } from '@/lib/invoicesApi';
+import { apiListClients } from '@/lib/clientsApi';
 import { useAuth } from '@/state/auth.jsx';
 import { useMoney } from '@/lib/money.js';
 import { getInvoiceLifecycle } from '@/lib/invoiceIntelligence.js';
-import { formatDateDDMMYYYY } from '@/lib/date.js';
 
-function DonutChart({ items, size = 164, stroke = 18 }) {
+function formatDateForCsv(value) {
+  if (!value) return '';
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  // Excel-friendly, unambiguous.
+  return d.toISOString().slice(0, 10);
+}
+
+function DonutChart({ items, size = 164, stroke = 18, activeKey, onSelect }) {
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const total = items.reduce((sum, it) => sum + Number(it.value || 0), 0);
@@ -49,6 +57,15 @@ function DonutChart({ items, size = 164, stroke = 18 }) {
           strokeDashoffset={seg.dashoffset}
           strokeLinecap="round"
           transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          opacity={!activeKey || activeKey === seg.key ? 1 : 0.35}
+          style={{ cursor: onSelect ? 'pointer' : undefined }}
+          onClick={
+            onSelect
+              ? () => {
+                  onSelect(seg.key);
+                }
+              : undefined
+          }
         />
       ))}
       <text
@@ -78,6 +95,8 @@ function Reports() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [invoices, setInvoices] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [activeStatusKey, setActiveStatusKey] = useState(null);
 
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -117,10 +136,11 @@ function Reports() {
     setIsLoading(true);
     setError('');
 
-    apiListInvoices(token)
-      .then((data) => {
+    Promise.all([apiListInvoices(token), apiListClients(token)])
+      .then(([inv, cl]) => {
         if (cancelled) return;
-        setInvoices(Array.isArray(data) ? data : []);
+        setInvoices(Array.isArray(inv) ? inv : []);
+        setClients(Array.isArray(cl) ? cl : []);
       })
       .catch((err) => {
         if (cancelled) return;
@@ -135,6 +155,14 @@ function Reports() {
       cancelled = true;
     };
   }, [token]);
+
+  const clientById = useMemo(() => {
+    const map = new Map();
+    for (const c of clients) {
+      if (c?._id) map.set(String(c._id), c);
+    }
+    return map;
+  }, [clients]);
 
   const filtered = useMemo(() => {
     const start = from ? new Date(from).getTime() : null;
@@ -217,14 +245,43 @@ function Reports() {
     ];
   }, [filtered]);
 
+  const clientsForActiveStatus = useMemo(() => {
+    if (!activeStatusKey) return [];
+
+    const names = new Map();
+    for (const inv of filtered) {
+      const intel = getInvoiceLifecycle(inv);
+      const matches =
+        (activeStatusKey === 'paid' && intel.computedStatus === 'paid') ||
+        (activeStatusKey === 'overdue' && intel.isOverdue) ||
+        (activeStatusKey === 'dueSoon' && intel.isDueSoon) ||
+        (activeStatusKey === 'unpaid' && intel.computedStatus !== 'paid' && !intel.isOverdue && !intel.isDueSoon);
+
+      if (!matches) continue;
+      const clientId = String(inv?.client?._id || inv?.client || '');
+      const client = clientById.get(clientId);
+      const name = String(client?.name || inv?.client?.name || clientId || '');
+      if (!name) continue;
+      names.set(name, (names.get(name) || 0) + 1);
+    }
+
+    return Array.from(names.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([name, count]) => ({ name, count }));
+  }, [activeStatusKey, clientById, filtered]);
+
   const onExportCsv = () => {
     const rows = [
       ['Invoice', 'Client', 'Created', 'Due', 'Status', 'Total'],
       ...filtered.map((inv) => [
         String(inv?.invoiceNumber || inv?._id || ''),
-        String(inv?.client || ''),
-        formatDateDDMMYYYY(inv?.date),
-        formatDateDDMMYYYY(inv?.dueDate),
+        (() => {
+          const clientId = String(inv?.client?._id || inv?.client || '');
+          const client = clientById.get(clientId);
+          return String(client?.name || inv?.client?.name || clientId || '');
+        })(),
+        formatDateForCsv(inv?.date),
+        formatDateForCsv(inv?.dueDate),
         String(inv?.status || ''),
         String(Number(inv?.total || 0)),
       ]),
@@ -242,7 +299,8 @@ function Reports() {
       )
       .join('\n');
 
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    // Add UTF-8 BOM for Excel.
+    const blob = new Blob(['\ufeff', csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -398,18 +456,53 @@ function Reports() {
 
               <div className="grid gap-5 p-6 sm:grid-cols-2 sm:items-center">
                 <div className="flex justify-center sm:justify-start">
-                  <DonutChart items={statusMix} />
+                  <DonutChart
+                    items={statusMix}
+                    activeKey={activeStatusKey}
+                    onSelect={(key) => setActiveStatusKey((prev) => (prev === key ? null : key))}
+                  />
                 </div>
                 <div className="space-y-3">
                   {statusMix.map((it) => (
-                    <div key={it.key} className="flex items-center justify-between gap-3">
+                    <button
+                      key={it.key}
+                      type="button"
+                      onClick={() => setActiveStatusKey((prev) => (prev === it.key ? null : it.key))}
+                      className="flex w-full items-center justify-between gap-3 rounded-xl border border-transparent px-2 py-1.5 text-left transition-colors hover:border-white/10 hover:bg-white/5"
+                    >
                       <div className="flex items-center gap-2">
                         <span className="h-2.5 w-2.5 rounded-full" style={{ background: it.color }} />
                         <div className="text-sm font-semibold text-white/85">{it.label}</div>
                       </div>
                       <div className="text-sm font-semibold tabular-nums text-white/85">{it.value}</div>
-                    </div>
+                    </button>
                   ))}
+
+                  {activeStatusKey ? (
+                    <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-semibold text-white/85">Clients</div>
+                        <button type="button" className="text-xs font-semibold text-white/55 hover:text-white/80" onClick={() => setActiveStatusKey(null)}>
+                          Clear
+                        </button>
+                      </div>
+                      <div className="mt-3 space-y-2">
+                        {clientsForActiveStatus.length ? (
+                          clientsForActiveStatus.slice(0, 12).map((row) => (
+                            <div key={row.name} className="flex items-center justify-between gap-3">
+                              <div className="text-sm font-semibold text-white/80">{row.name}</div>
+                              <div className="text-xs font-semibold tabular-nums text-white/60">{row.count}</div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-sm text-white/60">No clients in this segment.</div>
+                        )}
+                        {clientsForActiveStatus.length > 12 ? (
+                          <div className="pt-2 text-xs text-white/55">Showing top 12. Narrow the date range to focus.</div>
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

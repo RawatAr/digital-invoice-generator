@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useAuth } from '@/state/auth.jsx';
 
 function Stat({ label, value }) {
   return (
@@ -13,6 +14,7 @@ function Stat({ label, value }) {
 
 function Landing() {
   const reduceMotion = useReducedMotion();
+  const { isAuthenticated } = useAuth();
 
   const up = reduceMotion
     ? undefined
@@ -43,14 +45,16 @@ function Landing() {
             Build invoices in minutes, send them with confidence, and track what matters—without the admin-panel energy.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link to="/register" className="ds-btn-primary">
-              Get started
-            </Link>
-            <Link to="/login" className="ds-btn-secondary">
-              Sign in
-            </Link>
-          </div>
+          {!isAuthenticated ? (
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link to="/register" className="ds-btn-primary">
+                Get started
+              </Link>
+              <Link to="/login" className="ds-btn-secondary">
+                Sign in
+              </Link>
+            </div>
+          ) : null}
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
