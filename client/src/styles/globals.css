@@ -81,8 +81,9 @@ body {
 }
 
 ::selection {
-  background: rgba(var(--ring), 0.28);
-  color: rgb(var(--fg));
+  background: rgba(var(--ring), 0.44);
+  color: rgb(var(--on-brand));
+  text-shadow: none;
 }
 
 /* Higher-contrast notifications in light mode */

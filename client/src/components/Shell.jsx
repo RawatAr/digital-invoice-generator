@@ -24,20 +24,39 @@ function Shell() {
   const [hasSelection, setHasSelection] = useState(false);
 
   useEffect(() => {
+    const hasInputSelection = () => {
+      const el = document.activeElement;
+      if (!el) return false;
+      const tag = String(el.tagName || '').toLowerCase();
+      const isTextControl = tag === 'textarea' || (tag === 'input' && ['text', 'email', 'search', 'tel', 'url', 'password'].includes(String(el.type || '').toLowerCase()));
+      if (!isTextControl) return false;
+      try {
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        return Number.isFinite(start) && Number.isFinite(end) && end > start;
+      } catch {
+        return false;
+      }
+    };
+
     const onSelectionChange = () => {
       try {
         const sel = window.getSelection();
         const text = sel ? String(sel.toString() || '') : '';
-        setHasSelection(text.trim().length > 0);
+        setHasSelection(text.trim().length > 0 || hasInputSelection());
       } catch {
-        setHasSelection(false);
+        setHasSelection(hasInputSelection());
       }
     };
 
     document.addEventListener('selectionchange', onSelectionChange);
+    document.addEventListener('keyup', onSelectionChange);
+    document.addEventListener('mouseup', onSelectionChange);
     window.addEventListener('blur', () => setHasSelection(false));
     return () => {
       document.removeEventListener('selectionchange', onSelectionChange);
+      document.removeEventListener('keyup', onSelectionChange);
+      document.removeEventListener('mouseup', onSelectionChange);
     };
   }, []);
 

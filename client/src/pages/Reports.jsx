@@ -11,8 +11,9 @@ function formatDateForCsv(value) {
   if (!value) return '';
   const d = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(d.getTime())) return '';
-  // Excel-friendly, unambiguous.
-  return d.toISOString().slice(0, 10);
+  // Excel sometimes renders date cells as ##### depending on column width/format.
+  // Force text by prefixing apostrophe (Excel hides it in display).
+  return `'${d.toISOString().slice(0, 10)}`;
 }
 
 function DonutChart({ items, size = 164, stroke = 18, activeKey, onSelect }) {
