@@ -7,6 +7,10 @@
     {
       "source": "/uploads/:path*",
       "destination": "https://digital-invoice-generator.onrender.com/uploads/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
