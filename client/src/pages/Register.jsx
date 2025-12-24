@@ -12,6 +12,8 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -144,32 +146,52 @@ function Register() {
                 <label className="text-sm font-semibold text-white/85" htmlFor="password">
                   Password
                 </label>
-                <input
-                  id="password"
-                  className="ds-input"
-                  type="password"
-                  autoComplete="new-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    id="password"
+                    className="ds-input pr-12"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-white/70 hover:text-white"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                </div>
                 {password ? <div className={passwordError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{passwordError || 'Strong password.'}</div> : null}
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-white/85" htmlFor="confirm">
                   Confirm
                 </label>
-                <input
-                  id="confirm"
-                  className="ds-input"
-                  type="password"
-                  autoComplete="new-password"
-                  value={confirm}
-                  onChange={(e) => setConfirm(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    id="confirm"
+                    className="ds-input pr-12"
+                    type={showConfirm ? 'text' : 'password'}
+                    autoComplete="new-password"
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-white/70 hover:text-white"
+                    onClick={() => setShowConfirm((v) => !v)}
+                    aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
+                  >
+                    {showConfirm ? 'Hide' : 'Show'}
+                  </button>
+                </div>
                 {confirm ? <div className={confirmError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{confirmError || 'Passwords match.'}</div> : null}
               </div>
             </div>
