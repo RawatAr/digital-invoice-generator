@@ -31,7 +31,13 @@ export async function apiSendInvoiceEmailCustom(token, invoiceId, payload, curre
     throw new Error(text || 'Failed to send custom email');
   }
 
-  return res.json().catch(() => ({ message: 'Email sent successfully' }));
+  const text = await res.text().catch(() => '');
+  if (!text) return { message: 'Email sent successfully' };
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { message: text };
+  }
 }
 
 export async function apiListInvoiceEmailHistory(token, invoiceId) {

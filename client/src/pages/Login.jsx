@@ -14,6 +14,24 @@ function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  const emailError = useMemo(() => {
+    const v = String(email || '').trim();
+    if (!v) return 'Email is required.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Enter a valid email address.';
+    return '';
+  }, [email]);
+
+  const passwordError = useMemo(() => {
+    const v = String(password || '');
+    if (!v) return 'Password is required.';
+    if (v.length < 8) return 'Password must be at least 8 characters.';
+    return '';
+  }, [password]);
+
+  const canSubmit = useMemo(() => {
+    return !emailError && !passwordError && !isSubmitting;
+  }, [emailError, passwordError, isSubmitting]);
+
   const transition = useMemo(
     () => (reduceMotion ? undefined : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }),
     [reduceMotion],
@@ -22,6 +40,10 @@ function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    if (emailError || passwordError) {
+      setError(emailError || passwordError);
+      return;
+    }
     setIsSubmitting(true);
     try {
       await login({ email, password });
@@ -86,6 +108,7 @@ function Login() {
                 placeholder="you@company.com"
                 required
               />
+              {email ? <div className={emailError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{emailError || 'Looks good.'}</div> : null}
             </div>
 
             <div className="space-y-2">
@@ -102,6 +125,7 @@ function Login() {
                 placeholder="••••••••"
                 required
               />
+              {password ? <div className={passwordError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{passwordError || 'Looks good.'}</div> : null}
             </div>
 
             {error ? (
@@ -110,7 +134,7 @@ function Login() {
               </div>
             ) : null}
 
-            <button className="ds-btn-primary w-full" type="submit" disabled={isSubmitting}>
+            <button className="ds-btn-primary w-full" type="submit" disabled={!canSubmit}>
               {isSubmitting ? 'Signing in…' : 'Sign in'}
             </button>
 

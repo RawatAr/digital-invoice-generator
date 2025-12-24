@@ -15,6 +15,45 @@ function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  const nameError = useMemo(() => {
+    const v = String(name || '').trim();
+    if (!v) return 'Name is required.';
+    if (v.length < 2) return 'Name must be at least 2 characters.';
+    if (!/^[A-Za-z ]+$/.test(v)) return 'Name can contain only letters and spaces.';
+    return '';
+  }, [name]);
+
+  const passwordRules = useMemo(() => {
+    const v = String(password || '');
+    return {
+      minLen: v.length >= 8,
+      upper: /[A-Z]/.test(v),
+      lower: /[a-z]/.test(v),
+      number: /[0-9]/.test(v),
+      special: /[^A-Za-z0-9]/.test(v),
+    };
+  }, [password]);
+
+  const passwordError = useMemo(() => {
+    if (!password) return 'Password is required.';
+    if (!passwordRules.minLen) return 'Password must be at least 8 characters.';
+    if (!passwordRules.upper) return 'Password must include at least 1 uppercase letter.';
+    if (!passwordRules.lower) return 'Password must include at least 1 lowercase letter.';
+    if (!passwordRules.number) return 'Password must include at least 1 number.';
+    if (!passwordRules.special) return 'Password must include at least 1 special character.';
+    return '';
+  }, [password, passwordRules]);
+
+  const confirmError = useMemo(() => {
+    if (!confirm) return 'Please confirm your password.';
+    if (password !== confirm) return 'Passwords do not match.';
+    return '';
+  }, [password, confirm]);
+
+  const canSubmit = useMemo(() => {
+    return !nameError && !passwordError && !confirmError && !isSubmitting;
+  }, [nameError, passwordError, confirmError, isSubmitting]);
+
   const transition = useMemo(
     () => (reduceMotion ? undefined : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }),
     [reduceMotion],
@@ -23,8 +62,8 @@ function Register() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (password !== confirm) {
-      setError('Passwords do not match');
+    if (nameError || passwordError || confirmError) {
+      setError(nameError || passwordError || confirmError);
       return;
     }
     setIsSubmitting(true);
@@ -81,6 +120,7 @@ function Register() {
                 placeholder="Aryan"
                 required
               />
+              {name ? <div className={nameError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{nameError || 'Looks good.'}</div> : null}
             </div>
 
             <div className="space-y-2">
@@ -114,6 +154,7 @@ function Register() {
                   placeholder="••••••••"
                   required
                 />
+                {password ? <div className={passwordError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{passwordError || 'Strong password.'}</div> : null}
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-white/85" htmlFor="confirm">
@@ -129,6 +170,7 @@ function Register() {
                   placeholder="••••••••"
                   required
                 />
+                {confirm ? <div className={confirmError ? 'text-xs font-semibold text-rose-200' : 'text-xs text-white/55'}>{confirmError || 'Passwords match.'}</div> : null}
               </div>
             </div>
 
@@ -138,7 +180,7 @@ function Register() {
               </div>
             ) : null}
 
-            <button className="ds-btn-primary w-full" type="submit" disabled={isSubmitting}>
+            <button className="ds-btn-primary w-full" type="submit" disabled={!canSubmit}>
               {isSubmitting ? 'Creating…' : 'Create account'}
             </button>
 
