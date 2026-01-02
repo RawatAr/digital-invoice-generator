@@ -21,3 +21,4 @@
 [2026-01-02 17:50:46] Refactor invoice schema
 [2026-01-02 20:05:33] Fix total calculation bug
 [2026-01-02 20:44:48] Improve server-side validation
+[2026-01-02 15:57:34] Refactor invoice schema
