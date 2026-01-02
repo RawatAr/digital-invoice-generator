@@ -26,3 +26,4 @@
 [2026-01-02 14:08:02] Update GUIDE.md for users
 [2026-01-02 12:21:37] Add multi-currency support
 [2026-01-02 13:03:05] Update GUIDE.md for users
+[2026-01-02 11:33:22] Update GUIDE.md for users
