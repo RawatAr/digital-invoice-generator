@@ -29,3 +29,4 @@
 [2026-01-02 11:33:22] Update GUIDE.md for users
 [2026-01-03 17:37:01] Add multi-currency support
 [2026-01-03 21:59:50] Update client billing UI
+[2026-01-03 09:06:34] Add multi-currency support
