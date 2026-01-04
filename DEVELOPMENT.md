@@ -51,3 +51,4 @@
 [2026-01-04 11:24:38] Add multi-currency support
 [2026-01-04 10:13:20] Update client billing UI
 [2026-01-04 15:57:04] Improve server-side validation
+[2026-01-04 13:36:00] Update GUIDE.md for users
