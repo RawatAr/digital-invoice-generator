@@ -64,3 +64,4 @@
 [2026-01-04 19:32:26] Update client billing UI
 [2026-01-04 12:56:22] Fix total calculation bug
 [2026-01-04 10:28:46] Update GUIDE.md for users
+[2026-01-04 12:39:17] Update GUIDE.md for users
