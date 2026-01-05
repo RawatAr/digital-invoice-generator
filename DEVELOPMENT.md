@@ -74,3 +74,4 @@
 [2026-01-05 11:43:44] Add multi-currency support
 [2026-01-05 21:14:35] Fix total calculation bug
 [2026-01-05 12:17:39] Update GUIDE.md for users
+[2026-01-05 22:35:04] Improve server-side validation
