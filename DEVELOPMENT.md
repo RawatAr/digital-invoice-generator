@@ -88,3 +88,4 @@
 [2026-01-06 16:47:09] Add PDF generation logic
 [2026-01-06 15:09:20] Fix total calculation bug
 [2026-01-06 14:44:18] Update GUIDE.md for users
+[2026-01-06 22:02:44] Improve server-side validation
