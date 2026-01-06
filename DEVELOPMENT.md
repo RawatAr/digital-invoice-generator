@@ -90,3 +90,4 @@
 [2026-01-06 14:44:18] Update GUIDE.md for users
 [2026-01-06 22:02:44] Improve server-side validation
 [2026-01-06 17:42:04] Update GUIDE.md for users
+[2026-01-06 15:54:55] Update client billing UI
