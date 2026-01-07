@@ -110,3 +110,4 @@
 [2026-01-07 19:42:10] Add multi-currency support
 [2026-01-07 19:22:06] Improve server-side validation
 [2026-01-07 15:11:18] Add PDF generation logic
+[2026-01-07 17:32:01] Add multi-currency support
