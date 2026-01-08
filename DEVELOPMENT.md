@@ -128,3 +128,4 @@
 [2026-01-08 21:29:08] Update GUIDE.md for users
 [2026-01-08 16:07:45] Refactor invoice schema
 [2026-01-08 11:51:27] Update client billing UI
+[2026-01-08 16:54:36] Improve server-side validation
