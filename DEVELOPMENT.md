@@ -168,3 +168,4 @@
 [2026-01-11 11:19:13] Add multi-currency support
 [2026-01-11 16:44:28] Update client billing UI
 [2026-01-11 21:06:20] Add PDF generation logic
+[2026-01-11 14:51:41] Improve server-side validation
