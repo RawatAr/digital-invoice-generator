@@ -160,3 +160,4 @@
 [2026-01-11 19:20:57] Add PDF generation logic
 [2026-01-11 13:26:59] Improve server-side validation
 [2026-01-11 17:25:27] Add multi-currency support
+[2026-01-11 14:52:27] Update GUIDE.md for users
