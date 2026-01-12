@@ -170,3 +170,4 @@
 [2026-01-11 21:06:20] Add PDF generation logic
 [2026-01-11 14:51:41] Improve server-side validation
 [2026-01-11 14:53:16] Update GUIDE.md for users
+[2026-01-12 19:00:55] Fix total calculation bug
