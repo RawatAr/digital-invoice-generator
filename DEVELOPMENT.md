@@ -190,3 +190,4 @@
 [2026-01-13 17:23:01] Fix total calculation bug
 [2026-01-13 17:56:55] Update GUIDE.md for users
 [2026-01-13 11:38:29] Update GUIDE.md for users
+[2026-01-13 10:02:49] Add multi-currency support
