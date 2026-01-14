@@ -215,3 +215,4 @@
 [2026-01-14 16:48:40] Update GUIDE.md for users
 [2026-01-14 18:12:32] Improve server-side validation
 [2026-01-14 11:09:33] Improve server-side validation
+[2026-01-14 13:05:38] Refactor invoice schema
