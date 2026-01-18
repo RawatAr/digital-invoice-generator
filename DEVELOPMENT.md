@@ -245,3 +245,4 @@
 [2026-01-17 09:06:56] Fix total calculation bug
 [2026-01-17 18:01:45] Improve server-side validation
 [2026-01-18 10:05:36] Fix total calculation bug
+[2026-01-18 16:56:37] Update GUIDE.md for users
