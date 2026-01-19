@@ -260,3 +260,4 @@
 [2026-01-19 18:39:00] Fix total calculation bug
 [2026-01-19 11:24:19] Update GUIDE.md for users
 [2026-01-19 10:39:07] Update GUIDE.md for users
+[2026-01-19 14:51:08] Update GUIDE.md for users
