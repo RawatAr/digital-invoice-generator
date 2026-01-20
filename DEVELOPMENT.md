@@ -290,3 +290,4 @@
 [2026-01-20 10:33:41] Update client billing UI
 [2026-01-20 17:28:06] Improve server-side validation
 [2026-01-20 14:44:26] Update client billing UI
+[2026-01-20 09:02:40] Refactor invoice schema
