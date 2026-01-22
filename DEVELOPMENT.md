@@ -318,3 +318,4 @@
 [2026-01-21 18:43:56] Add multi-currency support
 [2026-01-21 14:46:23] Refactor invoice schema
 [2026-01-22 19:38:34] Add multi-currency support
+[2026-01-22 17:22:31] Update GUIDE.md for users
