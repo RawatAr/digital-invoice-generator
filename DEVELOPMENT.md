@@ -333,3 +333,4 @@
 [2026-01-23 17:04:03] Refactor invoice schema
 [2026-01-23 13:06:07] Fix total calculation bug
 [2026-01-23 16:11:15] Refactor invoice schema
+[2026-01-23 16:46:14] Update GUIDE.md for users
