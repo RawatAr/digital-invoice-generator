@@ -340,3 +340,4 @@
 [2026-01-23 14:33:17] Add PDF generation logic
 [2026-01-23 18:06:32] Update client billing UI
 [2026-01-23 15:22:19] Fix total calculation bug
+[2026-01-23 14:36:09] Add multi-currency support
