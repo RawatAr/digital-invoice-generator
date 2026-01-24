@@ -359,3 +359,4 @@
 [2026-01-24 14:25:12] Update GUIDE.md for users
 [2026-01-24 14:42:22] Update GUIDE.md for users
 [2026-01-24 13:26:38] Refactor invoice schema
+[2026-01-24 16:41:14] Update GUIDE.md for users
