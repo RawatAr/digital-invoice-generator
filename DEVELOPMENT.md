@@ -355,3 +355,4 @@
 [2026-01-24 12:16:11] Improve server-side validation
 [2026-01-24 20:51:56] Update client billing UI
 [2026-01-24 12:44:50] Update GUIDE.md for users
+[2026-01-24 21:17:20] Update GUIDE.md for users
