@@ -408,3 +408,4 @@
 [2026-01-28 21:12:51] Fix total calculation bug
 [2026-01-28 11:20:59] Fix total calculation bug
 [2026-01-28 16:13:42] Refactor invoice schema
+[2026-01-28 18:37:45] Update client billing UI
