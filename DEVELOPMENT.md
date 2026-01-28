@@ -396,3 +396,4 @@
 [2026-01-27 09:32:10] Update GUIDE.md for users
 [2026-01-28 09:50:36] Improve server-side validation
 [2026-01-28 14:26:32] Update GUIDE.md for users
+[2026-01-28 15:05:19] Update GUIDE.md for users
