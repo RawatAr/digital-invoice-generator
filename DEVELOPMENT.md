@@ -425,3 +425,4 @@
 [2026-01-29 15:20:09] Add PDF generation logic
 [2026-01-29 19:46:47] Add multi-currency support
 [2026-01-29 21:59:27] Refactor invoice schema
+[2026-01-29 19:13:54] Refactor invoice schema
