@@ -433,3 +433,4 @@
 [2026-01-30 11:20:33] Add PDF generation logic
 [2026-01-30 18:51:07] Update GUIDE.md for users
 [2026-01-30 21:08:22] Update GUIDE.md for users
+[2026-01-30 11:44:18] Update GUIDE.md for users
