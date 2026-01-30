@@ -447,3 +447,4 @@
 [2026-01-30 16:05:56] Add multi-currency support
 [2026-01-30 09:31:31] Fix total calculation bug
 [2026-01-30 09:45:57] Add PDF generation logic
+[2026-01-30 18:40:24] Improve server-side validation
