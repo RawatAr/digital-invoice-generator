@@ -432,3 +432,4 @@
 [2026-01-29 19:53:06] Refactor invoice schema
 [2026-01-30 11:20:33] Add PDF generation logic
 [2026-01-30 18:51:07] Update GUIDE.md for users
+[2026-01-30 21:08:22] Update GUIDE.md for users
