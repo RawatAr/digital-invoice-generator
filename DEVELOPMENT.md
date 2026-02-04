@@ -516,3 +516,4 @@
 [2026-02-04 09:46:31] Add multi-currency support
 [2026-02-04 20:07:36] Improve server-side validation
 [2026-02-04 20:25:35] Refactor invoice schema
+[2026-02-04 20:15:23] Update GUIDE.md for users
