@@ -512,3 +512,4 @@
 [2026-02-04 18:24:21] Fix total calculation bug
 [2026-02-04 15:12:10] Refactor invoice schema
 [2026-02-04 22:00:22] Add multi-currency support
+[2026-02-04 22:21:19] Improve server-side validation
