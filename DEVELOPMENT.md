@@ -551,3 +551,4 @@
 [2026-02-06 17:09:26] Improve server-side validation
 [2026-02-06 19:34:41] Fix total calculation bug
 [2026-02-06 18:17:33] Update client billing UI
+[2026-02-06 17:42:02] Update GUIDE.md for users
