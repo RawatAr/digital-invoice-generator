@@ -559,3 +559,4 @@
 [2026-02-06 12:30:12] Refactor invoice schema
 [2026-02-07 18:41:09] Fix total calculation bug
 [2026-02-07 15:40:10] Update GUIDE.md for users
+[2026-02-07 21:09:20] Improve server-side validation
