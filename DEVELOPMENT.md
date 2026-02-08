@@ -569,3 +569,4 @@
 [2026-02-08 13:25:29] Add multi-currency support
 [2026-02-08 15:34:25] Update GUIDE.md for users
 [2026-02-08 17:12:18] Improve server-side validation
+[2026-02-08 19:27:01] Add multi-currency support
