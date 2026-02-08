@@ -564,3 +564,4 @@
 [2026-02-08 09:43:17] Fix total calculation bug
 [2026-02-08 13:02:12] Improve server-side validation
 [2026-02-08 09:09:15] Refactor invoice schema
+[2026-02-08 14:26:52] Fix total calculation bug
