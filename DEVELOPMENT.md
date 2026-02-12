@@ -601,3 +601,4 @@
 [2026-02-12 12:40:49] Update client billing UI
 [2026-02-12 09:28:31] Add PDF generation logic
 [2026-02-12 09:14:33] Improve server-side validation
+[2026-02-12 09:16:43] Update GUIDE.md for users
