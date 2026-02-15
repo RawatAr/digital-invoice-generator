@@ -625,3 +625,4 @@
 [2026-02-14 19:05:52] Update client billing UI
 [2026-02-14 19:59:39] Improve server-side validation
 [2026-02-14 15:57:11] Refactor invoice schema
+[2026-02-15 15:23:56] Fix total calculation bug
