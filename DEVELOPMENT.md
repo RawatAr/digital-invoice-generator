@@ -644,3 +644,4 @@
 [2026-02-16 13:32:17] Update GUIDE.md for users
 [2026-02-16 12:09:50] Add multi-currency support
 [2026-02-16 21:37:47] Fix total calculation bug
+[2026-02-16 19:58:44] Fix total calculation bug
