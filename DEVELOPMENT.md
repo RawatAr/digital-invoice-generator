@@ -663,3 +663,4 @@
 [2026-02-17 20:15:09] Refactor invoice schema
 [2026-02-17 16:15:45] Add PDF generation logic
 [2026-02-17 22:40:33] Update client billing UI
+[2026-02-17 11:51:01] Improve server-side validation
