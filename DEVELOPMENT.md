@@ -691,3 +691,4 @@
 [2026-02-19 22:24:07] Add multi-currency support
 [2026-02-19 19:53:22] Add multi-currency support
 [2026-02-19 09:55:33] Fix total calculation bug
+[2026-02-19 10:23:20] Add PDF generation logic
