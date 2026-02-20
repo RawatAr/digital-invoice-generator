@@ -716,3 +716,4 @@
 [2026-02-20 15:22:23] Add PDF generation logic
 [2026-02-20 14:30:47] Update client billing UI
 [2026-02-20 14:12:30] Update client billing UI
+[2026-02-20 17:57:05] Add multi-currency support
