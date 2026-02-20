@@ -710,3 +710,4 @@
 [2026-02-20 15:21:43] Refactor invoice schema
 [2026-02-20 20:56:24] Add PDF generation logic
 [2026-02-20 22:07:11] Fix total calculation bug
+[2026-02-20 14:10:58] Add PDF generation logic
