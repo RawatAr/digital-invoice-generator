@@ -739,3 +739,4 @@
 [2026-02-21 20:26:25] Fix total calculation bug
 [2026-02-21 10:39:20] Add PDF generation logic
 [2026-02-22 11:36:15] Refactor invoice schema
+[2026-02-22 18:39:37] Update client billing UI
