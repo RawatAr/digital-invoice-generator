@@ -765,3 +765,4 @@
 [2026-02-25 12:02:12] Improve server-side validation
 [2026-02-25 13:15:36] Refactor invoice schema
 [2026-02-25 14:19:16] Refactor invoice schema
+[2026-02-25 18:01:36] Add multi-currency support
