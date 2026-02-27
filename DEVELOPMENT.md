@@ -789,3 +789,4 @@
 [2026-02-27 17:58:46] Add multi-currency support
 [2026-02-27 11:01:04] Add multi-currency support
 [2026-02-27 12:54:54] Add multi-currency support
+[2026-02-27 16:53:31] Update client billing UI
