@@ -802,3 +802,4 @@
 [2026-02-27 12:50:20] Add multi-currency support
 [2026-02-27 10:29:26] Add multi-currency support
 [2026-02-27 10:36:10] Add multi-currency support
+[2026-02-27 14:36:53] Fix total calculation bug
