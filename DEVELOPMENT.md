@@ -804,3 +804,4 @@
 [2026-02-27 10:36:10] Add multi-currency support
 [2026-02-27 14:36:53] Fix total calculation bug
 [2026-02-28 12:55:11] Add multi-currency support
+[2026-02-28 16:15:59] Update GUIDE.md for users
