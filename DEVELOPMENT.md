@@ -812,3 +812,4 @@
 [2026-02-28 22:38:23] Add PDF generation logic
 [2026-02-28 10:36:55] Fix total calculation bug
 [2026-02-28 17:24:43] Update client billing UI
+[2026-02-28 15:14:42] Fix total calculation bug
