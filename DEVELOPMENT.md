@@ -807,3 +807,4 @@
 [2026-02-28 16:15:59] Update GUIDE.md for users
 [2026-02-28 11:02:21] Improve server-side validation
 [2026-02-28 17:28:54] Update client billing UI
+[2026-02-28 20:11:32] Update GUIDE.md for users
