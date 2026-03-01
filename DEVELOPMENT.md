@@ -823,3 +823,4 @@
 [2026-03-01 20:54:50] Improve server-side validation
 [2026-03-01 22:09:29] Refactor invoice schema
 [2026-03-01 19:14:51] Refactor invoice schema
+[2026-03-01 22:34:47] Fix total calculation bug
