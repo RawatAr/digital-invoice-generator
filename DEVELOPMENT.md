@@ -828,3 +828,4 @@
 [2026-03-02 11:48:06] Update client billing UI
 [2026-03-02 20:36:46] Update client billing UI
 [2026-03-02 16:29:03] Update client billing UI
+[2026-03-02 12:35:08] Improve server-side validation
