@@ -842,3 +842,4 @@
 [2026-03-02 13:35:35] Add PDF generation logic
 [2026-03-02 14:51:16] Add multi-currency support
 [2026-03-02 11:08:08] Fix total calculation bug
+[2026-03-02 10:11:17] Update GUIDE.md for users
