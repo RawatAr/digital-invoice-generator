@@ -833,3 +833,4 @@
 [2026-03-02 09:28:35] Fix total calculation bug
 [2026-03-02 14:35:58] Add PDF generation logic
 [2026-03-02 11:06:16] Update GUIDE.md for users
+[2026-03-02 09:47:21] Update client billing UI
