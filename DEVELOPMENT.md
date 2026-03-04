@@ -859,3 +859,4 @@
 [2026-03-04 11:40:53] Update GUIDE.md for users
 [2026-03-04 17:53:55] Add multi-currency support
 [2026-03-04 13:17:00] Fix total calculation bug
+[2026-03-04 12:35:08] Update GUIDE.md for users
