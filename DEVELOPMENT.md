@@ -887,3 +887,4 @@
 [2026-03-05 10:48:57] Improve server-side validation
 [2026-03-05 18:53:48] Update client billing UI
 [2026-03-05 17:00:49] Add multi-currency support
+[2026-03-05 19:29:10] Add multi-currency support
