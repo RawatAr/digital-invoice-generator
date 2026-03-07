@@ -920,3 +920,4 @@
 [2026-03-07 11:46:05] Update client billing UI
 [2026-03-07 12:45:28] Add PDF generation logic
 [2026-03-07 21:28:12] Update GUIDE.md for users
+[2026-03-07 16:10:03] Update GUIDE.md for users
