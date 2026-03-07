@@ -903,3 +903,4 @@
 [2026-03-06 17:19:19] Add PDF generation logic
 [2026-03-07 13:20:14] Improve server-side validation
 [2026-03-07 12:50:13] Add multi-currency support
+[2026-03-07 21:49:47] Refactor invoice schema
