@@ -924,3 +924,4 @@
 [2026-03-07 13:15:45] Add multi-currency support
 [2026-03-07 20:07:22] Update GUIDE.md for users
 [2026-03-07 18:24:30] Improve server-side validation
+[2026-03-08 14:42:03] Improve server-side validation
