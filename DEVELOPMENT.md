@@ -943,3 +943,4 @@
 [2026-03-09 12:32:58] Add multi-currency support
 [2026-03-09 18:26:20] Add multi-currency support
 [2026-03-09 20:36:05] Improve server-side validation
+[2026-03-09 21:31:57] Refactor invoice schema
