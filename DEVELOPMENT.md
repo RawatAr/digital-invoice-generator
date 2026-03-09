@@ -951,3 +951,4 @@
 [2026-03-09 15:19:35] Add PDF generation logic
 [2026-03-09 21:28:08] Refactor invoice schema
 [2026-03-09 18:38:57] Fix total calculation bug
+[2026-03-09 19:19:15] Update GUIDE.md for users
