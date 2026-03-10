@@ -966,3 +966,4 @@
 [2026-03-10 15:29:05] Fix total calculation bug
 [2026-03-10 21:15:02] Add PDF generation logic
 [2026-03-10 09:59:47] Improve server-side validation
+[2026-03-10 16:05:36] Improve server-side validation
