@@ -957,3 +957,4 @@
 [2026-03-10 14:23:36] Add PDF generation logic
 [2026-03-10 12:25:51] Add PDF generation logic
 [2026-03-10 16:06:52] Improve server-side validation
+[2026-03-10 15:30:09] Update client billing UI
