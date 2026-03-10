@@ -968,3 +968,4 @@
 [2026-03-10 09:59:47] Improve server-side validation
 [2026-03-10 16:05:36] Improve server-side validation
 [2026-03-10 11:28:40] Add multi-currency support
+[2026-03-10 19:13:35] Fix total calculation bug
