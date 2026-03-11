@@ -979,3 +979,4 @@
 [2026-03-11 10:04:02] Add multi-currency support
 [2026-03-11 13:26:28] Improve server-side validation
 [2026-03-11 19:31:33] Update GUIDE.md for users
+[2026-03-11 22:17:14] Update client billing UI
