@@ -970,3 +970,4 @@
 [2026-03-10 11:28:40] Add multi-currency support
 [2026-03-10 19:13:35] Fix total calculation bug
 [2026-03-11 20:29:46] Update client billing UI
+[2026-03-11 09:07:16] Update GUIDE.md for users
