@@ -983,3 +983,4 @@
 [2026-03-11 10:30:49] Update GUIDE.md for users
 [2026-03-12 19:20:59] Refactor invoice schema
 [2026-03-12 21:37:29] Improve server-side validation
+[2026-03-12 22:01:31] Fix total calculation bug
