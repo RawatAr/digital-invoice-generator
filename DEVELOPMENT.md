@@ -997,3 +997,4 @@
 [2026-03-13 20:17:47] Update GUIDE.md for users
 [2026-03-13 10:04:31] Update GUIDE.md for users
 [2026-03-13 16:15:07] Add PDF generation logic
+[2026-03-13 10:09:18] Add multi-currency support
