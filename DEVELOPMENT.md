@@ -1013,3 +1013,4 @@
 [2026-03-14 11:14:25] Update GUIDE.md for users
 [2026-03-14 12:02:38] Fix total calculation bug
 [2026-03-14 12:13:00] Add PDF generation logic
+[2026-03-14 17:01:51] Update client billing UI
