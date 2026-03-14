@@ -1007,3 +1007,4 @@
 [2026-03-14 22:23:23] Fix total calculation bug
 [2026-03-14 19:19:45] Fix total calculation bug
 [2026-03-14 14:59:20] Fix total calculation bug
+[2026-03-14 11:48:43] Add PDF generation logic
