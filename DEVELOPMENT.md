@@ -1094,3 +1094,4 @@
 [2026-03-18 16:48:50] Add PDF generation logic
 [2026-03-18 13:17:06] Add multi-currency support
 [2026-03-18 14:49:52] Improve server-side validation
+[2026-03-19 12:53:31] Add multi-currency support
