@@ -1123,3 +1123,4 @@
 [2026-03-20 21:16:56] Refactor invoice schema
 [2026-03-20 18:15:01] Fix total calculation bug
 [2026-03-20 15:05:24] Refactor invoice schema
+[2026-03-20 10:25:48] Improve server-side validation
