@@ -1137,3 +1137,4 @@
 [2026-03-21 15:04:21] Update GUIDE.md for users
 [2026-03-21 11:46:54] Improve server-side validation
 [2026-03-21 17:55:50] Add multi-currency support
+[2026-03-21 14:44:36] Refactor invoice schema
