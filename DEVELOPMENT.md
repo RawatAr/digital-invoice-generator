@@ -1168,3 +1168,4 @@
 [2026-03-23 17:24:54] Add PDF generation logic
 [2026-03-23 15:24:16] Add PDF generation logic
 [2026-03-23 14:08:38] Improve server-side validation
+[2026-03-23 21:15:49] Fix total calculation bug
