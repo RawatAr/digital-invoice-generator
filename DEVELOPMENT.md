@@ -1201,3 +1201,4 @@
 [2026-03-26 16:00:12] Add multi-currency support
 [2026-03-26 11:02:01] Improve server-side validation
 [2026-03-26 15:12:26] Add multi-currency support
+[2026-03-26 15:34:26] Refactor invoice schema
