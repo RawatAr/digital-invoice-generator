@@ -1227,3 +1227,4 @@
 [2026-03-27 17:59:45] Update client billing UI
 [2026-03-27 19:41:17] Improve server-side validation
 [2026-03-27 10:41:47] Add PDF generation logic
+[2026-03-27 11:37:15] Add multi-currency support
