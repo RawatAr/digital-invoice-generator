@@ -1241,3 +1241,4 @@
 [2026-03-28 19:00:17] Add PDF generation logic
 [2026-03-28 15:42:49] Fix total calculation bug
 [2026-03-28 15:04:14] Refactor invoice schema
+[2026-03-28 09:27:30] Add multi-currency support
