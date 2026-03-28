@@ -1242,3 +1242,4 @@
 [2026-03-28 15:42:49] Fix total calculation bug
 [2026-03-28 15:04:14] Refactor invoice schema
 [2026-03-28 09:27:30] Add multi-currency support
+[2026-03-28 10:51:49] Update GUIDE.md for users
