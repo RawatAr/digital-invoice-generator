@@ -1251,3 +1251,4 @@
 [2026-03-28 12:48:55] Update client billing UI
 [2026-03-29 13:07:21] Update client billing UI
 [2026-03-29 20:36:39] Fix total calculation bug
+[2026-03-29 18:16:13] Improve server-side validation
