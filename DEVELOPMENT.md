@@ -1260,3 +1260,4 @@
 [2026-03-29 11:28:04] Update client billing UI
 [2026-03-29 11:35:45] Update GUIDE.md for users
 [2026-03-29 15:25:14] Add PDF generation logic
+[2026-03-29 14:07:23] Update GUIDE.md for users
