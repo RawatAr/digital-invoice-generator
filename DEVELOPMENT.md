@@ -1254,3 +1254,4 @@
 [2026-03-29 18:16:13] Improve server-side validation
 [2026-03-29 16:56:13] Refactor invoice schema
 [2026-03-29 17:33:00] Add PDF generation logic
+[2026-03-29 11:02:37] Update GUIDE.md for users
