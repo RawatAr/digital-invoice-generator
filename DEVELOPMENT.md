@@ -1295,3 +1295,4 @@
 [2026-03-31 12:57:02] Update client billing UI
 [2026-03-31 19:51:25] Add PDF generation logic
 [2026-03-31 18:54:40] Improve server-side validation
+[2026-03-31 16:12:32] Fix total calculation bug
