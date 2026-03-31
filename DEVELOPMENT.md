@@ -1285,3 +1285,4 @@
 [2026-03-31 16:20:37] Refactor invoice schema
 [2026-03-31 12:40:48] Add multi-currency support
 [2026-03-31 11:51:50] Fix total calculation bug
+[2026-03-31 18:29:40] Update client billing UI
