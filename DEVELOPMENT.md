@@ -1291,3 +1291,4 @@
 [2026-03-31 22:09:51] Add PDF generation logic
 [2026-03-31 16:32:26] Update client billing UI
 [2026-03-31 09:49:14] Improve server-side validation
+[2026-03-31 17:43:33] Update GUIDE.md for users
