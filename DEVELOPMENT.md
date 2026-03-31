@@ -1287,3 +1287,4 @@
 [2026-03-31 11:51:50] Fix total calculation bug
 [2026-03-31 18:29:40] Update client billing UI
 [2026-03-31 17:49:13] Update client billing UI
+[2026-03-31 21:31:44] Update GUIDE.md for users
