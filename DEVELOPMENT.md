@@ -1314,3 +1314,4 @@
 [2026-04-02 17:26:51] Refactor invoice schema
 [2026-04-02 20:57:29] Update GUIDE.md for users
 [2026-04-02 19:17:53] Update client billing UI
+[2026-04-02 15:12:58] Add PDF generation logic
