@@ -1382,3 +1382,4 @@
 [2026-04-06 19:39:48] Update GUIDE.md for users
 [2026-04-06 13:50:57] Improve server-side validation
 [2026-04-06 11:36:47] Improve server-side validation
+[2026-04-06 16:59:20] Add multi-currency support
