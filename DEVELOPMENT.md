@@ -1395,3 +1395,4 @@
 [2026-04-06 10:40:10] Fix total calculation bug
 [2026-04-06 22:28:21] Add PDF generation logic
 [2026-04-06 15:46:19] Update client billing UI
+[2026-04-06 12:42:16] Improve server-side validation
