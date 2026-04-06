@@ -1389,3 +1389,4 @@
 [2026-04-06 21:10:37] Add multi-currency support
 [2026-04-06 10:35:02] Add multi-currency support
 [2026-04-06 18:29:05] Improve server-side validation
+[2026-04-06 12:02:04] Fix total calculation bug
