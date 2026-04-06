@@ -1387,3 +1387,4 @@
 [2026-04-06 17:43:27] Add PDF generation logic
 [2026-04-06 16:50:51] Add multi-currency support
 [2026-04-06 21:10:37] Add multi-currency support
+[2026-04-06 10:35:02] Add multi-currency support
