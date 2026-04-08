@@ -1415,3 +1415,4 @@
 [2026-04-07 19:23:34] Update GUIDE.md for users
 [2026-04-07 21:48:59] Fix total calculation bug
 [2026-04-07 13:03:52] Add multi-currency support
+[2026-04-08 19:41:49] Update GUIDE.md for users
