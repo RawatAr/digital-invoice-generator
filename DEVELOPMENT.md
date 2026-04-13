@@ -1462,3 +1462,4 @@
 [2026-04-12 14:50:46] Improve server-side validation
 [2026-04-12 10:49:33] Update client billing UI
 [2026-04-12 13:40:25] Update GUIDE.md for users
+[2026-04-13 11:35:17] Refactor invoice schema
