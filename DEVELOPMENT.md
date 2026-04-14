@@ -1480,3 +1480,4 @@
 [2026-04-13 14:21:14] Refactor invoice schema
 [2026-04-13 15:50:51] Improve server-side validation
 [2026-04-14 12:55:04] Add multi-currency support
+[2026-04-14 17:49:48] Update client billing UI
