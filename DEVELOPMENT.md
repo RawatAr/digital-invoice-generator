@@ -1497,3 +1497,4 @@
 [2026-04-14 16:49:44] Add PDF generation logic
 [2026-04-14 16:49:29] Refactor invoice schema
 [2026-04-14 14:26:55] Refactor invoice schema
+[2026-04-15 16:13:15] Add PDF generation logic
