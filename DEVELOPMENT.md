@@ -1514,3 +1514,4 @@
 [2026-04-17 11:29:36] Add multi-currency support
 [2026-04-17 12:57:21] Update client billing UI
 [2026-04-17 12:34:35] Add multi-currency support
+[2026-04-17 22:26:49] Refactor invoice schema
