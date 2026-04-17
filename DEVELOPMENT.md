@@ -1509,3 +1509,4 @@
 [2026-04-17 09:18:02] Update GUIDE.md for users
 [2026-04-17 18:21:24] Update GUIDE.md for users
 [2026-04-17 11:41:45] Refactor invoice schema
+[2026-04-17 20:27:03] Update GUIDE.md for users
