@@ -1607,3 +1607,4 @@
 [2026-04-22 10:16:48] Update GUIDE.md for users
 [2026-04-22 17:26:06] Improve server-side validation
 [2026-04-22 13:33:30] Improve server-side validation
+[2026-04-22 20:15:18] Update GUIDE.md for users
