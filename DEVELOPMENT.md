@@ -1616,3 +1616,4 @@
 [2026-04-23 19:46:12] Improve server-side validation
 [2026-04-23 09:37:10] Update GUIDE.md for users
 [2026-04-23 20:55:44] Fix total calculation bug
+[2026-04-23 15:29:42] Refactor invoice schema
