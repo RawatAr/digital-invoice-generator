@@ -1631,3 +1631,4 @@
 [2026-04-23 22:05:35] Refactor invoice schema
 [2026-04-23 21:24:32] Refactor invoice schema
 [2026-04-23 17:54:45] Add multi-currency support
+[2026-04-23 22:19:36] Add multi-currency support
