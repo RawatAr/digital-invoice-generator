@@ -1673,3 +1673,4 @@
 [2026-04-27 10:20:24] Add PDF generation logic
 [2026-04-27 16:43:20] Update GUIDE.md for users
 [2026-04-27 22:20:32] Update client billing UI
+[2026-04-27 18:30:16] Add multi-currency support
