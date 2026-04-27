@@ -1671,3 +1671,4 @@
 [2026-04-27 11:32:53] Add PDF generation logic
 [2026-04-27 09:46:56] Improve server-side validation
 [2026-04-27 10:20:24] Add PDF generation logic
+[2026-04-27 16:43:20] Update GUIDE.md for users
