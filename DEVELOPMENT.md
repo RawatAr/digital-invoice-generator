@@ -1710,3 +1710,4 @@
 [2026-04-29 14:22:21] Add PDF generation logic
 [2026-04-29 12:22:08] Refactor invoice schema
 [2026-04-30 21:36:33] Improve server-side validation
+[2026-04-30 18:41:12] Refactor invoice schema
