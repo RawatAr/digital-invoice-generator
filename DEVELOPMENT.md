@@ -1715,3 +1715,4 @@
 [2026-04-30 19:37:57] Update GUIDE.md for users
 [2026-04-30 11:11:49] Add multi-currency support
 [2026-04-30 18:52:53] Update GUIDE.md for users
+[2026-04-30 11:47:48] Improve server-side validation
