@@ -1738,3 +1738,4 @@
 [2026-05-01 14:48:04] Refactor invoice schema
 [2026-05-01 17:06:32] Add multi-currency support
 [2026-05-01 18:18:12] Add PDF generation logic
+[2026-05-01 14:37:00] Update client billing UI
