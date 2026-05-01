@@ -1747,3 +1747,4 @@
 [2026-05-01 13:35:43] Update client billing UI
 [2026-05-01 21:50:10] Refactor invoice schema
 [2026-05-01 10:06:26] Update client billing UI
+[2026-05-01 13:55:07] Update GUIDE.md for users
