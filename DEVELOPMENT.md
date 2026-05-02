@@ -1752,3 +1752,4 @@
 [2026-05-02 16:08:21] Update client billing UI
 [2026-05-02 12:04:18] Update client billing UI
 [2026-05-02 12:39:19] Add multi-currency support
+[2026-05-02 15:04:17] Add multi-currency support
