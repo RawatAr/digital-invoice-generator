@@ -1765,3 +1765,4 @@
 [2026-05-03 17:10:19] Add PDF generation logic
 [2026-05-03 11:47:55] Add multi-currency support
 [2026-05-03 09:13:11] Fix total calculation bug
+[2026-05-03 11:03:27] Improve server-side validation
