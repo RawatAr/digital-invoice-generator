@@ -1771,3 +1771,4 @@
 [2026-05-03 13:17:29] Update GUIDE.md for users
 [2026-05-03 17:28:11] Update client billing UI
 [2026-05-03 16:28:13] Refactor invoice schema
+[2026-05-04 19:02:16] Add multi-currency support
