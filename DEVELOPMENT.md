@@ -1790,3 +1790,4 @@
 [2026-05-05 19:53:03] Update client billing UI
 [2026-05-05 21:43:19] Update GUIDE.md for users
 [2026-05-05 21:43:22] Update client billing UI
+[2026-05-05 12:07:22] Fix total calculation bug
