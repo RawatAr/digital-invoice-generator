@@ -1791,3 +1791,4 @@
 [2026-05-05 21:43:19] Update GUIDE.md for users
 [2026-05-05 21:43:22] Update client billing UI
 [2026-05-05 12:07:22] Fix total calculation bug
+[2026-05-05 20:56:46] Add multi-currency support
