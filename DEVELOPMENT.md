@@ -1813,3 +1813,4 @@
 [2026-05-08 16:03:33] Fix total calculation bug
 [2026-05-08 21:31:55] Add multi-currency support
 [2026-05-08 10:34:03] Fix total calculation bug
+[2026-05-08 14:21:59] Improve server-side validation
