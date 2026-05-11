@@ -1856,3 +1856,4 @@
 [2026-05-11 20:37:59] Improve server-side validation
 [2026-05-11 22:15:41] Improve server-side validation
 [2026-05-11 21:53:41] Improve server-side validation
+[2026-05-11 21:21:50] Update GUIDE.md for users
