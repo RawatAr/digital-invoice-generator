@@ -1849,3 +1849,4 @@
 [2026-05-11 10:52:47] Update GUIDE.md for users
 [2026-05-11 10:17:42] Add PDF generation logic
 [2026-05-11 20:04:49] Improve server-side validation
+[2026-05-11 21:58:22] Improve server-side validation
