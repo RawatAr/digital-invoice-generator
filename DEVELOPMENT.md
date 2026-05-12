@@ -1865,3 +1865,4 @@
 [2026-05-11 10:47:17] Refactor invoice schema
 [2026-05-11 21:51:40] Update client billing UI
 [2026-05-11 09:38:50] Fix total calculation bug
+[2026-05-12 17:41:16] Update GUIDE.md for users
