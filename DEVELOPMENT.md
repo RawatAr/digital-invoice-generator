@@ -1867,3 +1867,4 @@
 [2026-05-11 09:38:50] Fix total calculation bug
 [2026-05-12 17:41:16] Update GUIDE.md for users
 [2026-05-12 22:10:24] Refactor invoice schema
+[2026-05-12 09:42:56] Update GUIDE.md for users
