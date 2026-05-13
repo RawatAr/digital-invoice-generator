@@ -1870,3 +1870,4 @@
 [2026-05-12 09:42:56] Update GUIDE.md for users
 [2026-05-12 12:52:59] Add multi-currency support
 - 2026-05-13T20:41:29: Add history list to main dashboard page
+- 2026-05-13T15:26:04: Update client billing calculations logic
