@@ -1869,3 +1869,4 @@
 [2026-05-12 22:10:24] Refactor invoice schema
 [2026-05-12 09:42:56] Update GUIDE.md for users
 [2026-05-12 12:52:59] Add multi-currency support
+- 2026-05-13T20:41:29: Add history list to main dashboard page
