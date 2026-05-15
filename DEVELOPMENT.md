@@ -1877,3 +1877,4 @@
 - 2026-05-13T11:21:06: Add history list to main dashboard page
 - 2026-05-14T19:25:11: Configure custom themes for invoice templates
 - 2026-05-14T19:08:22: Fix PDF document layout formatting
+- 2026-05-15T21:18:09: Refactor client information input form
