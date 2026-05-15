@@ -1880,3 +1880,4 @@
 - 2026-05-15T21:18:09: Refactor client information input form
 - 2026-05-15T15:22:01: Optimize PDF rendering performance
 - 2026-05-15T18:28:39: Optimize PDF rendering performance
+- 2026-05-15T16:49:51: Add exports to CSV functionality
