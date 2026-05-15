@@ -1881,3 +1881,4 @@
 - 2026-05-15T15:22:01: Optimize PDF rendering performance
 - 2026-05-15T18:28:39: Optimize PDF rendering performance
 - 2026-05-15T16:49:51: Add exports to CSV functionality
+- 2026-05-15T19:47:20: Add history list to main dashboard page
