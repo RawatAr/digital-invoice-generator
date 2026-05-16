@@ -1883,3 +1883,4 @@
 - 2026-05-15T16:49:51: Add exports to CSV functionality
 - 2026-05-15T19:47:20: Add history list to main dashboard page
 - 2026-05-15T11:03:37: Add history list to main dashboard page
+- 2026-05-16T17:32:50: Add exports to CSV functionality
