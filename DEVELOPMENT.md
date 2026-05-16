@@ -1885,3 +1885,4 @@
 - 2026-05-15T11:03:37: Add history list to main dashboard page
 - 2026-05-16T17:32:50: Add exports to CSV functionality
 - 2026-05-16T19:07:50: Configure custom themes for invoice templates
+- 2026-05-16T20:53:34: Add history list to main dashboard page
