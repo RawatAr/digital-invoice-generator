@@ -1887,3 +1887,4 @@
 - 2026-05-16T19:07:50: Configure custom themes for invoice templates
 - 2026-05-16T20:53:34: Add history list to main dashboard page
 - 2026-05-16T11:18:44: Update invoice templates layout styling
+- 2026-05-17T10:44:16: Add local storage caching for invoice data
