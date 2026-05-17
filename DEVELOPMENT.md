@@ -1896,3 +1896,4 @@
 - 2026-05-17T12:53:40: Configure custom themes for invoice templates
 - 2026-05-17T13:32:07: Fix PDF document layout formatting
 - 2026-05-17T12:35:45: Add exports to CSV functionality
+- 2026-05-17T20:39:29: Add local storage caching for invoice data
