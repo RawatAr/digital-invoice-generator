@@ -1892,3 +1892,4 @@
 - 2026-05-17T21:24:14: Add local storage caching for invoice data
 - 2026-05-17T12:18:35: Add local storage caching for invoice data
 - 2026-05-17T14:53:24: Add local storage caching for invoice data
+- 2026-05-17T18:22:15: Fix form field validation errors
