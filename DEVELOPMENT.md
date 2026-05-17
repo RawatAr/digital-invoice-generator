@@ -1894,3 +1894,4 @@
 - 2026-05-17T14:53:24: Add local storage caching for invoice data
 - 2026-05-17T18:22:15: Fix form field validation errors
 - 2026-05-17T12:53:40: Configure custom themes for invoice templates
+- 2026-05-17T13:32:07: Fix PDF document layout formatting
