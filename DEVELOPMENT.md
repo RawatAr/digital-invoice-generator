@@ -1898,3 +1898,4 @@
 - 2026-05-17T12:35:45: Add exports to CSV functionality
 - 2026-05-17T20:39:29: Add local storage caching for invoice data
 - 2026-05-17T09:09:48: Fix form field validation errors
+- 2026-05-18T20:14:23: Add exports to CSV functionality
