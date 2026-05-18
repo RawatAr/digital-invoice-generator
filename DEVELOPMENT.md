@@ -1900,3 +1900,4 @@
 - 2026-05-17T09:09:48: Fix form field validation errors
 - 2026-05-18T20:14:23: Add exports to CSV functionality
 - 2026-05-18T09:31:38: Refactor client information input form
+- 2026-05-18T18:13:53: Update invoice templates layout styling
