@@ -1905,3 +1905,4 @@
 - 2026-05-18T11:24:35: Fix form field validation errors
 - 2026-05-19T21:29:17: Configure custom themes for invoice templates
 - 2026-05-19T10:38:02: Configure custom themes for invoice templates
+- 2026-05-19T18:45:49: Add history list to main dashboard page
