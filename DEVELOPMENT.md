@@ -1908,3 +1908,4 @@
 - 2026-05-19T18:45:49: Add history list to main dashboard page
 - 2026-05-19T11:43:13: Add history list to main dashboard page
 - 2026-05-19T16:53:35: Fix form field validation errors
+- 2026-05-19T10:41:56: Add exports to CSV functionality
