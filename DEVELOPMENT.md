@@ -1906,3 +1906,4 @@
 - 2026-05-19T21:29:17: Configure custom themes for invoice templates
 - 2026-05-19T10:38:02: Configure custom themes for invoice templates
 - 2026-05-19T18:45:49: Add history list to main dashboard page
+- 2026-05-19T11:43:13: Add history list to main dashboard page
