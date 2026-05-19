@@ -1910,3 +1910,4 @@
 - 2026-05-19T16:53:35: Fix form field validation errors
 - 2026-05-19T10:41:56: Add exports to CSV functionality
 - 2026-05-19T14:10:42: Add local storage caching for invoice data
+- 2026-05-19T16:23:24: Refactor client information input form
