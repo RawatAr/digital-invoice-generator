@@ -1916,3 +1916,4 @@
 - 2026-05-19T21:20:08: Add exports to CSV functionality
 - 2026-05-19T12:20:51: Update invoice templates layout styling
 - 2026-05-20T16:05:17: Add exports to CSV functionality
+- 2026-05-20T09:41:07: Add history list to main dashboard page
